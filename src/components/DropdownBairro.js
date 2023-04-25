@@ -3,8 +3,8 @@ import { RiMapPinLine, RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 import { Menu } from '@headlessui/react';
 import { HouseContext } from './HouseContext';
 
-const CountryDropdown = () => {
-  const { country, setCountry, countries } = useContext(HouseContext);
+const DropdownBairro = () => {
+  const { bairro, setBairro, bairros } = useContext(HouseContext);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -15,7 +15,7 @@ const CountryDropdown = () => {
       >
         <RiMapPinLine className='dropdown-icon-primary' />
         <div>
-          <div className='text-[15px] font-medium leading-tight'>{country}</div>
+          <div className='text-[15px] font-medium leading-tight'>{bairro}</div>
           <div className='text-[13px]'>Selecione a localização</div>
         </div>
         {isOpen ? (
@@ -25,10 +25,10 @@ const CountryDropdown = () => {
         )}
       </Menu.Button>
       <Menu.Items className='dropdown-menu'>
-        {countries.map((c, i) => {
+        {bairros.map((c, i) => {
           return (
             <Menu.Item
-              onClick={() => setCountry(c)}
+              onClick={() => setBairro(c)}
               as='li'
               key={i}
               className='cursor-pointer hover:text-violet-700 transition'
@@ -42,4 +42,4 @@ const CountryDropdown = () => {
   );
 };
 
-export default CountryDropdown;
+export default DropdownBairro;

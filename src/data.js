@@ -57,13 +57,14 @@ import Agent12 from './assets/img/agents/agent12.png';
 export const housesData = [
   {
     id: 1,
-    type: 'House',
+    type: 'Casa',
     name: 'House 1',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
     image: House1,
     imageLg: House1Lg,
-    country: 'United States',
+    country: 'Estreito',
+    bairro: 'Estreito',
     address: '7240C Argyle St. Lawndale, CA 90260',
     bedrooms: '6',
     bathrooms: '3',
@@ -78,7 +79,7 @@ export const housesData = [
   },
   {
     id: 2,
-    type: 'House',
+    type: 'Casa',
     name: 'House 2',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
@@ -99,13 +100,14 @@ export const housesData = [
   },
   {
     id: 3,
-    type: 'House',
+    type: 'Casa',
     name: 'House 3',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
     image: House3,
     imageLg: House3Lg,
-    country: 'United States',
+    country: 'Estreito',
+    bairro: 'Estreito',
     address: '2 Glen Creek St. Alexandria, VA 22304',
     bedrooms: '6',
     bathrooms: '3',
@@ -120,7 +122,7 @@ export const housesData = [
   },
   {
     id: 4,
-    type: 'House',
+    type: 'Casa',
     name: 'House 4',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
@@ -141,13 +143,14 @@ export const housesData = [
   },
   {
     id: 5,
-    type: 'House',
+    type: 'Casa',
     name: 'House 5',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
     image: House5,
     imageLg: House5Lg,
-    country: 'United States',
+    country: 'Estreito',
+    bairro: 'Estreito',
     address: '28 Westport Dr. Warminster, PA 18974',
     bedrooms: '5',
     bathrooms: '3',
@@ -162,7 +165,7 @@ export const housesData = [
   },
   {
     id: 6,
-    type: 'House',
+    type: 'Casa',
     name: 'House 6',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
@@ -183,7 +186,7 @@ export const housesData = [
   },
   {
     id: 7,
-    type: 'Apartament',
+    type: 'Apartamento',
     name: 'Apartament 1',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
@@ -204,13 +207,14 @@ export const housesData = [
   },
   {
     id: 8,
-    type: 'Apartament',
+    type: 'Apartamento',
     name: 'Apartament 2',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
     image: Apartment2,
     imageLg: Apartment2Lg,
-    country: 'United States',
+    country: 'Estreito',
+    bairro: 'Estreito',
     address: '28 Westport Dr. Warminster, PA 18974',
     bedrooms: '3',
     bathrooms: '1',
@@ -225,13 +229,14 @@ export const housesData = [
   },
   {
     id: 9,
-    type: 'Apartament',
+    type: 'Apartamento',
     name: 'Apartament 3',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
     image: Apartment3,
     imageLg: Apartment3Lg,
-    country: 'United States',
+    country: 'Estreito',
+    bairro: 'Estreito',
     address: '84 Woodland St. Cocoa, FL 32927',
     bedrooms: '2',
     bathrooms: '1',
@@ -246,7 +251,7 @@ export const housesData = [
   },
   {
     id: 10,
-    type: 'House',
+    type: 'Casa',
     name: 'House 7',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
@@ -267,7 +272,7 @@ export const housesData = [
   },
   {
     id: 11,
-    type: 'House',
+    type: 'Casa',
     name: 'House 8',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
@@ -288,13 +293,14 @@ export const housesData = [
   },
   {
     id: 12,
-    type: 'House',
+    type: 'Casa',
     name: 'House 9',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
     image: House9,
     imageLg: House9Lg,
-    country: 'United States',
+    country: 'Estreito',
+    bairro: 'Estreito',
     address: '2 Glen Creek St. Alexandria, VA 22304',
     bedrooms: '4',
     bathrooms: '4',
@@ -309,7 +315,7 @@ export const housesData = [
   },
   {
     id: 13,
-    type: 'House',
+    type: 'Casa',
     name: 'House 10',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
@@ -330,13 +336,14 @@ export const housesData = [
   },
   {
     id: 14,
-    type: 'House',
+    type: 'Casa',
     name: 'House 11',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
     image: House11,
     imageLg: House11Lg,
-    country: 'United States',
+    country: 'Estreito',
+    bairro: 'Estreito',
     address: '28 Westport Dr. Warminster, PA 18974',
     bedrooms: '5',
     bathrooms: '2',
@@ -351,7 +358,7 @@ export const housesData = [
   },
   {
     id: 15,
-    type: 'House',
+    type: 'Casa',
     name: 'House 12',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
@@ -372,7 +379,7 @@ export const housesData = [
   },
   {
     id: 16,
-    type: 'Apartament',
+    type: 'Apartamento',
     name: 'Apartament 16',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
@@ -393,13 +400,14 @@ export const housesData = [
   },
   {
     id: 17,
-    type: 'Apartament',
+    type: 'Apartamento',
     name: 'Apartament 17',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
     image: Apartment5,
     imageLg: Apartment5Lg,
-    country: 'United States',
+    country: 'Estreito',
+    bairro: 'Estreito',
     address: '28 Westport Dr. Warminster, PA 18974',
     bedrooms: '3',
     bathrooms: '1',
@@ -414,7 +422,7 @@ export const housesData = [
   },
   {
     id: 18,
-    type: 'Apartament',
+    type: 'Apartamento',
     name: 'Apartament 18',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
