@@ -9,6 +9,15 @@ export default function CorretorHenrySimon({ user, imovel, id }) {
   const inputPhone = useRef();
   const inputText = useRef();
 
+  const sendMail = (event) => {
+    event.preventDefault();
+    const name = inputName.current.value;
+    const email = inputEmail.current.value;
+    const phone = inputPhone.current.value;
+    const message = inputText.current.value;
+    console.log(name, email, phone, message);
+  }
+
   return (
     <div className='flex-1 bg-white w-full mb-8 border border-gray-300 rounded-lg px-6 py-8'>
       <div className='flex items-center gap-x-4 mb-8'>
@@ -53,7 +62,10 @@ export default function CorretorHenrySimon({ user, imovel, id }) {
           ref={inputText}
         ></textarea>
         <div className='flex gap-x-2'>
-          <button className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition'>
+          <button
+            className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition'
+            onClick={ sendMail }
+          >
             Enviar e-mail
           </button>
           <button className='border border-violet-700 text-violet-700 hover:border-violet-500 hover:text-violet-500 rounded p-4 text-sm w-full transition'>
