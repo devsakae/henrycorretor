@@ -8,9 +8,6 @@ import House6 from './assets/img/houses/house6.png';
 import House7 from './assets/img/houses/house7.png';
 import House8 from './assets/img/houses/house8.png';
 import House9 from './assets/img/houses/house9.png';
-import House10 from './assets/img/houses/house10.png';
-import House11 from './assets/img/houses/house11.png';
-import House12 from './assets/img/houses/house12.png';
 // import house large images
 import House1Lg from './assets/img/houses/house1lg.png';
 import House2Lg from './assets/img/houses/house2lg.png';
@@ -21,101 +18,81 @@ import House6Lg from './assets/img/houses/house6lg.png';
 import House7Lg from './assets/img/houses/house7lg.png';
 import House8Lg from './assets/img/houses/house8lg.png';
 import House9Lg from './assets/img/houses/house9lg.png';
-import House10Lg from './assets/img/houses/house10lg.png';
-import House11Lg from './assets/img/houses/house11lg.png';
-import House12Lg from './assets/img/houses/house12lg.png';
 
 // import apartments images
 import Apartment1 from './assets/img/apartments/a1.png';
 import Apartment2 from './assets/img/apartments/a2.png';
 import Apartment3 from './assets/img/apartments/a3.png';
-import Apartment4 from './assets/img/apartments/a4.png';
-import Apartment5 from './assets/img/apartments/a5.png';
-import Apartment6 from './assets/img/apartments/a6.png';
 // import apartments large images
 import Apartment1Lg from './assets/img/apartments/a1lg.png';
 import Apartment2Lg from './assets/img/apartments/a2lg.png';
 import Apartment3Lg from './assets/img/apartments/a3lg.png';
-import Apartment4Lg from './assets/img/apartments/a4lg.png';
-import Apartment5Lg from './assets/img/apartments/a5lg.png';
-import Apartment6Lg from './assets/img/apartments/a6lg.png';
 
 // import agents images
-import Agent1 from './assets/img/agents/agent1.png';
-import Agent2 from './assets/img/agents/agent2.png';
-import Agent3 from './assets/img/agents/agent3.png';
-import Agent4 from './assets/img/agents/agent4.png';
-import Agent5 from './assets/img/agents/agent5.png';
-import Agent6 from './assets/img/agents/agent6.png';
-import Agent7 from './assets/img/agents/agent7.png';
-import Agent8 from './assets/img/agents/agent8.png';
-import Agent9 from './assets/img/agents/agent9.png';
-import Agent10 from './assets/img/agents/agent10.png';
-import Agent11 from './assets/img/agents/agent11.png';
-import Agent12 from './assets/img/agents/agent12.png';
+import Henry from './assets/img/agents/henrysimon.png';
 
 export const housesData = [
   {
     id: 1,
     type: 'Casa',
-    name: 'House 1',
+    name: 'Mansão na Lagoa',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
+      'Casa grande, de dois pisos, em conceito aberto, localizado no coração da Lagoa da Conceição, ao lado do Terminal Urbano e próximo ao centrinho. Espaço gourmet, cozinha com utensílios profissionais, piscina, churrasqueira, garagem para dois veículos, esta residência vai fazer você se apaixonar ainda mais por Floranópolis',
     image: House1,
     imageLg: House1Lg,
-    bairro: 'Estreito',
-    address: '7240C Argyle St. Lawndale, CA 90260',
-    bedrooms: '6',
+    bairro: 'Lagoa da Conceição',
+    address: 'Condomínio Lagoa',
+    bedrooms: '3',
     bathrooms: '3',
-    surface: '4200 sq ft',
-    year: '2016',
-    price: '150000',
+    surface: '720 m2',
+    year: '2020',
+    price: '5000000',
     agent: {
-      image: Agent1,
-      name: 'Patricia Tullert',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
   {
     id: 2,
     type: 'Casa',
-    name: 'House 2',
+    name: 'Residência nos Ingleses',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
+      'Residência localizada a 200 metros da praia, possui um estilo vintage por ter sido fabricada na década de 70/80. O quintal desta residência possui diversas árvores frutíferas, além de possuir churrasqueira, rancho e espaço para mais de 4 carros na garagem.',
     image: House2,
     imageLg: House2Lg,
-    bairro: 'Centro',
-    address: '798 Talbot St. Bridgewater, NJ 08807',
-    bedrooms: '6',
-    bathrooms: '3',
-    surface: '4200 sq ft',
-    year: '2016',
-    price: '140000',
+    bairro: 'Ingleses',
+    address: 'Rua Osvaldo Clímaco, 160',
+    bedrooms: '4',
+    bathrooms: '2',
+    surface: '800 m2',
+    year: '1981',
+    price: '1200000',
     agent: {
-      image: Agent2,
-      name: 'Daryl Hawker',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
   {
     id: 3,
-    type: 'Casa',
-    name: 'House 3',
+    type: 'Apartamento',
+    name: 'Residencial Central Park',
     description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
+      'Apartamento semimobiliado, localizado no sexto andar do bloco B (equivalente ao oitavo andar do bloco A), possui vista para o Parque São Jorge. Condomínio com piscina, salão de festas, salão de jogos, mercado pague-por-uso, portaria remota 24 horas. Vaga de garagem localizada defronte ao hall. Localização próxima a Fiesc, restaurante, posto de gasolina e parques, do lado da subida do morro da Lagoa da Conceição.',
     image: House3,
     imageLg: House3Lg,
-    bairro: 'Estreito',
-    address: '2 Glen Creek St. Alexandria, VA 22304',
-    bedrooms: '6',
-    bathrooms: '3',
-    surface: '4200 sq ft',
-    year: '2016',
-    price: '170000',
+    bairro: 'Itacorubi',
+    address: 'Rua Salvatina Feliciana dos Santos, 260',
+    bedrooms: '2',
+    bathrooms: '2',
+    surface: '78 m2',
+    year: '2012',
+    price: '580000',
     agent: {
-      image: Agent3,
-      name: 'Amado Smith',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
   {
@@ -134,9 +111,9 @@ export const housesData = [
     year: '2016',
     price: '200000',
     agent: {
-      image: Agent4,
-      name: 'Kaitlyn Gonzalez',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
   {
@@ -155,9 +132,9 @@ export const housesData = [
     year: '2015',
     price: '210000',
     agent: {
-      image: Agent5,
-      name: 'Grover Robinson',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
   {
@@ -176,9 +153,9 @@ export const housesData = [
     year: '2014',
     price: '220000',
     agent: {
-      image: Agent6,
-      name: 'Karen Sorensen',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
   {
@@ -197,9 +174,9 @@ export const housesData = [
     year: '2012',
     price: '260000',
     agent: {
-      image: Agent7,
-      name: 'Jawhar Shamil Naser',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
   {
@@ -218,9 +195,9 @@ export const housesData = [
     year: '2011',
     price: '300000',
     agent: {
-      image: Agent8,
-      name: 'Juana Douglass',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
   {
@@ -239,9 +216,9 @@ export const housesData = [
     year: '2011',
     price: '535000',
     agent: {
-      image: Agent9,
-      name: 'Jerry Schenck',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
   {
@@ -260,9 +237,9 @@ export const housesData = [
     year: '2015',
     price: '850000',
     agent: {
-      image: Agent10,
-      name: 'Vera Levesque',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
   {
@@ -281,9 +258,9 @@ export const housesData = [
     year: '2019',
     price: '230000',
     agent: {
-      image: Agent11,
-      name: 'Sofia Gomes',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
   {
@@ -302,135 +279,9 @@ export const housesData = [
     year: '2015',
     price: '980000',
     agent: {
-      image: Agent12,
-      name: 'Raymond Hood',
-      phone: '0123 456 78910',
-    },
-  },
-  {
-    id: 13,
-    type: 'Casa',
-    name: 'House 10',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
-    image: House10,
-    imageLg: House10Lg,
-    bairro: 'Centro',
-    address: '84 Woodland St. Cocoa, FL 32927',
-    bedrooms: '5',
-    bathrooms: '2',
-    surface: '5200 sq ft',
-    year: '2014',
-    price: '1800000',
-    agent: {
-      image: Agent1,
-      name: 'Patricia Tullert',
-      phone: '0123 456 78910',
-    },
-  },
-  {
-    id: 14,
-    type: 'Casa',
-    name: 'House 11',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
-    image: House11,
-    imageLg: House11Lg,
-    bairro: 'Estreito',
-    address: '28 Westport Dr. Warminster, PA 18974',
-    bedrooms: '5',
-    bathrooms: '2',
-    surface: '3200 sq ft',
-    year: '2011',
-    price: '2200000',
-    agent: {
-      image: Agent2,
-      name: 'Daryl Hawker',
-      phone: '0123 456 78910',
-    },
-  },
-  {
-    id: 15,
-    type: 'Casa',
-    name: 'House 12',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
-    image: House12,
-    imageLg: House12Lg,
-    bairro: 'Centro',
-    address: '32 Pawnee Street Butte, MT 59701',
-    bedrooms: '4',
-    bathrooms: '3',
-    surface: '5200 sq ft',
-    year: '2013',
-    price: '610000',
-    agent: {
-      image: Agent3,
-      name: 'Amado Smith',
-      phone: '0123 456 78910',
-    },
-  },
-  {
-    id: 16,
-    type: 'Apartamento',
-    name: 'Apartament 16',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
-    image: Apartment4,
-    imageLg: Apartment4Lg,
-    bairro: 'Centro',
-    address: '32 Pawnee Street Butte, MT 59701',
-    bedrooms: '2',
-    bathrooms: '1',
-    surface: '1300 sq ft',
-    year: '2011',
-    price: '1900000',
-    agent: {
-      image: Agent4,
-      name: 'Kaitlyn Gonzalez',
-      phone: '0123 456 78910',
-    },
-  },
-  {
-    id: 17,
-    type: 'Apartamento',
-    name: 'Apartament 17',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
-    image: Apartment5,
-    imageLg: Apartment5Lg,
-    bairro: 'Estreito',
-    address: '28 Westport Dr. Warminster, PA 18974',
-    bedrooms: '3',
-    bathrooms: '1',
-    surface: '1000 sq ft',
-    year: '2012',
-    price: '175000',
-    agent: {
-      image: Agent5,
-      name: 'Grover Robinson',
-      phone: '0123 456 78910',
-    },
-  },
-  {
-    id: 18,
-    type: 'Apartamento',
-    name: 'Apartament 18',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, illoat. Repudiandae ratione impedit delectus consectetur. Aspernaturvero obcaecati placeat ab distinctio unde ipsam molestias atqueratione delectus blanditiis nemo eius dignissimos doloremque quaealiquid maiores id tempore consequatur, quod pariatur saepe.',
-    image: Apartment6,
-    imageLg: Apartment6Lg,
-    bairro: 'Centro',
-    address: '84 Woodland St. Cocoa, FL 32927',
-    bedrooms: '3',
-    bathrooms: '1',
-    surface: '1200 sq ft',
-    year: '2010',
-    price: '500000',
-    agent: {
-      image: Agent6,
-      name: 'Karen Sorensen',
-      phone: '0123 456 78910',
+      image: Henry,
+      name: 'Henry Simon',
+      phone: '+55 (48) 99630-0018',
     },
   },
 ];
