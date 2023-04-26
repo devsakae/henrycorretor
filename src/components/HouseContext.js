@@ -1,26 +1,38 @@
 import React, { useState, createContext, useEffect } from 'react';
 
 import { housesData } from '../data';
-
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 export const HouseContext = createContext();
 
 const HouseContextProvider = ({ children }) => {
-  const [houses, setHouses] = useState(housesData);
+  const [houses, setHouses] = useState([]);
   const [bairro, setBairro] = useState('Todos os bairros');
   const [bairros, setBairros] = useState([]);
   const [property, setProperty] = useState('Todos os tipos');
-  const [properties, setProperties] = useState([]);
+  const [types, setTypes] = useState([]);
   const [price, setPrice] = useState('Todos os preços');
   const [loading, setLoading] = useState(false);
-
+  
   useEffect(() => {
-    const allBairros = housesData.map((house) => house.bairro);
-    const uniqueBairros = ['Todos os bairros', ...new Set(allBairros)];
-    setBairros(uniqueBairros)
+    setLoading(true);
+    const db = getFirestore();
+    const colRef = collection(db, 'imoveis');
+    getDocs(colRef)
+      .then((snapshot) => {
+        let imoveis = [];
+        snapshot.docs.forEach((doc) => imoveis.push({ ...doc.data(), id: doc.id }));
+        setHouses(imoveis);
+        
+        const allBairros = imoveis.map((im) => im.bairro);
+        const uniqueBairros = ['Todos os bairros', ...new Set(allBairros)];
+        setBairros(uniqueBairros);
 
-    const allProperties = housesData.map((house) => house.type);
-    const uniqueProperties = ['Todos os tipos', ...new Set(allProperties)];
-    setProperties(uniqueProperties);
+        const allProperties = imoveis.map((im) => im.type);
+        const uniqueProperties = ['Todos os tipos', ...new Set(allProperties)];
+        setTypes(uniqueProperties);    
+      })
+      .catch((err) => console.log(err.message))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleClick = () => {
@@ -74,8 +86,7 @@ const HouseContextProvider = ({ children }) => {
         setBairros,
         property,
         setProperty,
-        properties,
-        setProperties,
+        types,
         price,
         setPrice,
         loading,

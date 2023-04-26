@@ -2,7 +2,7 @@ import React from 'react';
 import { BiBed, BiBath, BiArea } from 'react-icons/bi';
 
 const House = ({ house }) => {
-  const { image, type, bairro, address, bedrooms, bathrooms, surface, price } = house;
+  const { image, type, bairro, address, comodos, banheiros, area, price } = house;
   return (
     <div className='bg-white shadow-1 p-5 rounded-lg rounded-tl-[90px] w-full max-w-[352px] mx-auto cursor-pointer hover:shadow-2xl transition'>
       <img src={ image } alt='' className='mb-8' />
@@ -17,19 +17,19 @@ const House = ({ house }) => {
           <div className='text-[20px]'>
             <BiBed />
           </div>
-          <div>{ bedrooms }</div>
+          <div>{ comodos }</div>
         </div>
         <div className='flex items-center text-gray-600 gap-1'>
           <div className='text-[20px]'>
             <BiBath />
           </div>
-          <div>{ bathrooms }</div>
+          <div>{ banheiros }</div>
         </div>
         <div className='flex items-center text-gray-600 gap-1'>
           <div className='text-[20px]'>
             <BiArea />
           </div>
-          <div>{ surface }</div>
+          <div>{ area } m2</div>
         </div>
       </div>
       <div className='text-lg font-semibold text-violet-600 mb-4'>{ Number(price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }</div>

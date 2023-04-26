@@ -6,7 +6,6 @@ import Header from './components/Header';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import PropertyDetails from './pages/PropertyDetails';
-import Login from './pages/Login';
 import { AuthContextProvider } from './lib/AuthContext';
 
 const App = () => {
@@ -15,7 +14,6 @@ const App = () => {
       <div className='max-w-[1440px] mx-auto bg-white'>
         <Header />
         <Routes>
-          <Route exact path='/login' element={<Login />} />
           <Route path='/imovel/:id' element={<PropertyDetails />} />
           <Route exact path='/' element={<Home />} />
         </Routes>

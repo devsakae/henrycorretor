@@ -4,7 +4,7 @@ import { Menu } from '@headlessui/react';
 import { HouseContext } from './HouseContext';
 
 const PropertyDropdown = () => {
-  const { property, setProperty, properties } = useContext(HouseContext);
+  const { property, setProperty, types } = useContext(HouseContext);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -25,7 +25,7 @@ const PropertyDropdown = () => {
         )}
       </Menu.Button>
       <Menu.Items className='dropdown-menu'>
-        { properties.map((c, i) => {
+        { types.map((c, i) => {
           return (
             <Menu.Item
               onClick={() => setProperty(c)}
