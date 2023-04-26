@@ -1,10 +1,13 @@
 import React from 'react';
-
+import GoogleButton from 'react-google-button';
 import { Link } from 'react-router-dom';
 // import Logo from '../assets/img/logo.svg';
+import { UserAuth } from '../lib/AuthContext';
 import Logo from '../assets/img/HenrySimon.png'
+import UserBox from './UserBox';
 
 const Header = () => {
+  const { googleSignIn, user } = UserAuth();
   return (
     <header className='py-6 mb-12 border-b'>
       <div className='container mx-auto flex justify-between items-center'>
@@ -12,15 +15,15 @@ const Header = () => {
           <img src={Logo} alt='Henry Simon Corretor' />
         </Link>
         <div className='flex items-center gap-6'>
-          <Link className='hover:text-violet-900 transition' to='/'>
-            Login
-          </Link>
-          <Link
-            className='bg-violet-700 hover:bg-violet-800 text-white px-4 py-3 rounded-lg transition'
-            to='/'
-          >
-            Registre-se
-          </Link>
+          {
+            user ?
+            <UserBox /> :
+            <GoogleButton
+              type='light'
+              label='Conectar com Google'
+              onClick={ googleSignIn }
+            />
+          }
         </div>
       </div>
     </header>
