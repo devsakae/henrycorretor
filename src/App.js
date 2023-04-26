@@ -12,8 +12,8 @@ const App = () => {
     <div className='max-w-[1440px] mx-auto bg-white'>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/imoveil/:id" element={<PropertyDetails />} />
+        <Route path="/imovel/:id" element={<PropertyDetails />} />
+        <Route exact path="/" element={<Home />} />
       </Routes>
       <Footer />
     </div>

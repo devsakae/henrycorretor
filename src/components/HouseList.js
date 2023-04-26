@@ -18,7 +18,7 @@ const HouseList = () => {
         <div className='grid md:grid-cols-2 lg:grid-cols-3'>
           {houses.map((house, idx) => {
             return (
-              <Link to={`property/${house.id}`} key={idx}>
+              <Link to={`imovel/${house.id}`} key={idx}>
                 <House house={house} />
               </Link>
             );
