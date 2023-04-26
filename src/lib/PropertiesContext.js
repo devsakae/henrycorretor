@@ -1,10 +1,9 @@
-import React, { useState, createContext, useEffect } from 'react';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import React, { createContext, useEffect, useState } from 'react'
 
-import { housesData } from '../data';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-export const HouseContext = createContext();
+export const PropertyContext = createContext();
 
-const HouseContextProvider = ({ children }) => {
+const PropertyContextProvider = ({ children }) => {
   const [houses, setHouses] = useState([]);
   const [bairro, setBairro] = useState('Todos os bairros');
   const [bairros, setBairros] = useState([]);
@@ -44,7 +43,7 @@ const HouseContextProvider = ({ children }) => {
     if (price.includes('500.000,00')) priceParsed = 500000;
     if (price.includes('1.000.000,00')) priceParsed = 1000000;
 
-    const newHouses = housesData.filter((house) => {
+    const newHouses = houses.filter((house) => {
       const housePrice = parseInt(house.price);
       if (
         house.bairro === bairro &&
@@ -75,27 +74,25 @@ const HouseContextProvider = ({ children }) => {
     return newHouses;
   };
 
-  return (
-    <HouseContext.Provider
-      value={{
-        houses,
-        setHouses,
-        bairro,
-        setBairro,
-        bairros,
-        setBairros,
-        property,
-        setProperty,
-        types,
-        price,
-        setPrice,
-        loading,
-        handleClick,
-      }}
-    >
-      {children}
-    </HouseContext.Provider>
-  );
-};
+  const value = {
+    houses,
+    setHouses,
+    bairro,
+    setBairro,
+    bairros,
+    setBairros,
+    property,
+    setProperty,
+    types,
+    price,
+    setPrice,
+    loading,
+    handleClick,
+  }
 
-export default HouseContextProvider;
+  return (
+    <PropertyContext.Provider value={ value }>{ children }</PropertyContext.Provider>
+  )
+}
+
+export default PropertyContextProvider;

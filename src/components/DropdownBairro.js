@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { RiMapPinLine, RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 import { Menu } from '@headlessui/react';
-import { HouseContext } from './HouseContext';
+import { PropertyContext } from '../lib/PropertiesContext';
 
 const DropdownBairro = () => {
-  const { bairro, setBairro, bairros } = useContext(HouseContext);
+  const { bairro, setBairro, bairros } = useContext(PropertyContext);
   const [isOpen, setIsOpen] = useState(false);
 
   return (

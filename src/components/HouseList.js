@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { HouseContext } from '../components/HouseContext';
+import { PropertyContext } from '../lib/PropertiesContext';
 import House from './House';
 import { Link } from 'react-router-dom';
 import { ImSpinner2 } from 'react-icons/im';
 
 const HouseList = () => {
-  const { houses, loading } = useContext(HouseContext);
+  const { houses, loading } = useContext(PropertyContext);
   if (loading)
     return (
       <ImSpinner2 className='mx-auto animate-spin text-violet-700 text-4xl mt-[200px]' />
