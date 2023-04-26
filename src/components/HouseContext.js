@@ -6,8 +6,6 @@ export const HouseContext = createContext();
 
 const HouseContextProvider = ({ children }) => {
   const [houses, setHouses] = useState(housesData);
-  // const [country, setCountry] = useState('Todos os bairros');
-  // const [countries, setCountries] = useState([]);
   const [bairro, setBairro] = useState('Todos os bairros');
   const [bairros, setBairros] = useState([]);
   const [property, setProperty] = useState('Todos os tipos');
@@ -16,20 +14,17 @@ const HouseContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // const allCountries = houses.map((house) => house.country);
-    // const uniqueCountries = ['Todos os bairros', ...new Set(allCountries)];
-    // setCountries(uniqueCountries);
-
-    const allBairros = houses.map((house) => house.bairro);
+    const allBairros = housesData.map((house) => house.bairro);
     const uniqueBairros = ['Todos os bairros', ...new Set(allBairros)];
     setBairros(uniqueBairros)
 
-    const allProperties = houses.map((house) => house.type);
+    const allProperties = housesData.map((house) => house.type);
     const uniqueProperties = ['Todos os tipos', ...new Set(allProperties)];
     setProperties(uniqueProperties);
-  }, [houses]);
+  }, []);
 
   const handleClick = () => {
+    setLoading(true);
     const isDefault = (str) => str.split(' ').includes('Todos');
     // price handling
     let priceParsed = 9999999999;
@@ -52,8 +47,19 @@ const HouseContextProvider = ({ children }) => {
       if (isDefault(bairro) && isDefault(property) && !isDefault(price)) return housePrice <= priceParsed;
       if (!isDefault(bairro) && !isDefault(property) && isDefault(price)) return house.bairro === bairro && house.type === property;
       if (!isDefault(bairro) && isDefault(property) && !isDefault(price)) return house.bairro === bairro && housePrice <= priceParsed;
+      if (isDefault(bairro) && !isDefault(property) && !isDefault(price)) {
+        if (housePrice >= house.price) {
+          return house.type === property;
+        }
+      }
       return house;
     });
+    setTimeout(() => {
+      return (
+        newHouses.length < 1 ? setHouses([]) : setHouses(newHouses),
+        setLoading(false)
+        )
+    }, 1000)    
     return newHouses;
   };
 
@@ -73,7 +79,6 @@ const HouseContextProvider = ({ children }) => {
         price,
         setPrice,
         loading,
-        setLoading,
         handleClick,
       }}
     >

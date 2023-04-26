@@ -30,9 +30,9 @@ const PriceRangeDropdown = () => {
           <div className='text-[13px]'>Selecione a faixa de preço</div>
         </div>
         {isOpen ? (
-          <RiArrowDownSLine className='dropdown-icon-secondary' />
-          ) : (
           <RiArrowUpSLine className='dropdown-icon-secondary' />
+        ) : (
+          <RiArrowDownSLine className='dropdown-icon-secondary' />
         )}
       </Menu.Button>
       <Menu.Items className='dropdown-menu'>
