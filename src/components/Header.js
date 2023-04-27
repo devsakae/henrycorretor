@@ -10,7 +10,7 @@ const Header = () => {
   const { googleSignIn, user } = UserAuth();
   return (
     <header className='py-6 mb-12 border-b'>
-      <div className='container mx-auto flex justify-between items-center'>
+      <div className='container mx-auto flex flex-col justify-between items-center lg:flex-row'>
         <Link to='/'>
           <img src={Logo} alt='Henry Simon Corretor' />
         </Link>
