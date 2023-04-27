@@ -78,7 +78,7 @@ export default function AdminManageSingle({ data }) {
 
   const updateImovel = async (event) => {
     setLoading(true);
-    // event.preventDefault();
+    event.preventDefault();
     const payload = validateFields();
     const docRef = doc(db, 'imoveis', data.id);
     await setDoc(docRef, payload, { merge: true });
@@ -104,7 +104,7 @@ export default function AdminManageSingle({ data }) {
         <span>ID: {data.id}</span>
       </div>
       {active && (
-        <>
+        <div className='flex flex-col justify-center'>
           <form className='flex flex-col lg:flex-row lg:w-full items-center justify-evenly'>
             <div className='flex flex-col items-start gap-y-4 p-4 w-full lg:w-2/3'>
               <input
@@ -222,7 +222,7 @@ export default function AdminManageSingle({ data }) {
             <div className='flex flex-col gap-y-4 p-4 w-full lg:w-1/3'>
               <textarea
                 ref={inputDescription}
-                className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full p-4 min-h-48 text-sm resize-none'
+                className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full p-4 h-48 text-sm resize-none'
                 placeholder='Descrição completa do imóvel'
                 defaultValue={data.description}
               ></textarea>
@@ -233,14 +233,21 @@ export default function AdminManageSingle({ data }) {
           ) : saved ? (
             'Salvo! Atualize a página'
           ) : (
-            <button
-              className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-2/3 transition'
-              onClick={updateImovel}
-            >
-              Salvar
-            </button>
+            <div className='flex flex-row gap-x-4 justify-center'>
+              <button
+                className='bg-violet-700 hover:bg-gray-400 hover:text-black text-white rounded p-4 text-sm min-w-[200px] transition'
+                onClick={updateImovel}
+              >
+                Salvar
+              </button>
+              <button
+                className='bg-white text-black hover:bg-violet-400 hover:text-white border-violet-400 border-2 rounded p-4 text-sm min-w-[200px] transition'
+              >
+                Alterar fotos
+              </button>
+            </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );

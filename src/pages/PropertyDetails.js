@@ -10,6 +10,7 @@ const PropertyDetails = () => {
   const { user } = UserAuth();
   const [detailed, setDetailed] = useState({ name: 'Aguarde' });
   const [loading, setLoading] = useState(true);
+  const [imageChange, setImageChange] = useState(true);
 
   useEffect(() => {
     const fetchById = async () => {
@@ -50,8 +51,10 @@ const PropertyDetails = () => {
           </div>
           <div className='flex flex-col items-start gap-8 lg:flex-row'>
             <div className='max-w-[768px]'>
-              <div className='mb-8'>
-                <img src={detailed?.image1} alt='' />
+              <div className='mb-8' onClick={() => {
+                detailed.image2 ? setImageChange(!imageChange) : setImageChange(true)
+              } }>
+                <img src={ imageChange ? detailed?.image1 : detailed?.image2 } alt='' />
               </div>
               <div className='flex gap-x-6 mb-6 text-violet-700'>
                 <div className='flex flex-col gap-x-2 items-center'>
