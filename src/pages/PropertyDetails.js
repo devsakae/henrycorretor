@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { BiBed, BiBath, BiArea } from 'react-icons/bi';
+import { BiBed, BiBath, BiArea, BiCar } from 'react-icons/bi';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import CorretorHenrySimon from '../components/CorretorHenrySimon';
 import { UserAuth } from '../lib/AuthContext';
@@ -70,6 +70,15 @@ const PropertyDetails = () => {
                   </div>
                   <div className='text-xs text-black'>
                     Banheiros
+                  </div>
+                </div>
+                <div className='flex flex-col gap-x-2 items-center'>
+                  <div className='flex flex-row items-center gap-x-2'>
+                  <BiCar className='text-2xl' />
+                  <div className='text-black'>{detailed?.vagas}</div>
+                  </div>
+                  <div className='text-xs text-black'>
+                    Vagas
                   </div>
                 </div>
                 <div className='flex flex-col gap-x-2 items-center'>

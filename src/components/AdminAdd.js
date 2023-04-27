@@ -55,7 +55,7 @@ export default function AdminAdd() {
       return alert('Preencha todos os campos obrigatórios');
     }
     setName(name);
-    return { name, type, description, address, bairro, area, price, comodos, banheiros, vagas };
+    return { name, type, description, address, bairro, area: Number(area), price: Number(price), comodos: Number(comodos), banheiros: Number(banheiros), vagas: Number(vagas) };
   }
 
   const saveNewImovel = async (event) => {
@@ -74,87 +74,89 @@ export default function AdminAdd() {
       <h1 className='font-bold text-lg p-4'>Adicionar novo imóvel</h1>
       {
         newId ? <AdminAddPhoto imovelId={ newId } imovelName={ name } /> : (
-        <form className='flex flex-col lg:flex-row lg:w-full items-center justify-evenly'>
-          <div className='flex flex-col items-start gap-y-4 p-4 w-full lg:w-2/3'>
-            <input
-              id='name'
-              type='text'
-              placeholder='Título do imóvel'
-              className={ styleInput }
-              ref={inputTitle}
-              />
-            <input
-              id='address'
-              type='text'
-              placeholder='Endereço'
-              className={styleInput}
-              ref={inputAddress}
-              />
-            <div className='flex flex-row items-center justify-between w-full gap-x-4'>
-              <select name='type' ref={inputType} className={styleInput}>
-                <option name='type' value='Apartamento'>Apartamento</option>
-                <option name='type' value='Casa'>Casa</option>
-                <option name='type' value='Terreno'>Terreno</option>
-              </select>
-              <select
-                name='bairro'
-                ref={inputBairro}
+        <>
+          <form className='flex flex-col lg:flex-row lg:w-full items-center justify-evenly'>
+            <div className='flex flex-col items-start gap-y-4 p-4 w-full lg:w-2/3'>
+              <input
+                id='name'
+                type='text'
+                placeholder='Título do imóvel'
+                className={ styleInput }
+                ref={inputTitle}
+                />
+              <input
+                id='address'
+                type='text'
+                placeholder='Endereço'
                 className={styleInput}
-                onChange={handleBairros}
-                >
-                {bairroadmin.map((b, i) => (
-                  <option name='bairro' value={b} key={i}>
-                    {b}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {insertBairro && (
+                ref={inputAddress}
+                />
               <div className='flex flex-row items-center justify-between w-full gap-x-4'>
-                <input
-                  type='text'
+                <select name='type' ref={inputType} className={styleInput}>
+                  <option name='type' value='Apartamento'>Apartamento</option>
+                  <option name='type' value='Casa'>Casa</option>
+                  <option name='type' value='Terreno'>Terreno</option>
+                </select>
+                <select
                   name='bairro'
                   ref={inputBairro}
-                  placeholder='Digite o nome do bairro'
                   className={styleInput}
+                  onChange={handleBairros}
+                  >
+                  {bairroadmin.map((b, i) => (
+                    <option name='bairro' value={b} key={i}>
+                      {b}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {insertBairro && (
+                <div className='flex flex-row items-center justify-between w-full gap-x-4'>
+                  <input
+                    type='text'
+                    name='bairro'
+                    ref={inputBairro}
+                    placeholder='Digite o nome do bairro'
+                    className={styleInput}
+                    />
+                </div>
+              )}
+              <div className='flex flex-row items-center justify-between w-full gap-x-4'>
+                <input type='number' placeholder='Área' className={styleInput} ref={ inputArea } />
+                <input type='number' placeholder='Preço' className={styleInput} ref={ inputPrice } />
+              </div>
+            </div>
+            <div className='flex flex-col gap-y-4 p-4 w-full lg:w-1/3'>
+              <div className='flex flex-row items-center justify-between w-full gap-x-4'>
+                <input type='number' placeholder='Comodos' className={styleInput} ref={ inputComodos } />
+                <input
+                  type='number'
+                  min='0'
+                  placeholder='Banheiros'
+                  className={styleInput}
+                  ref={ inputBanheiros }
+                  />
+                <input
+                  type='number'
+                  placeholder='Vagas'
+                  className={styleInput}
+                  ref={ inputVagas }
                   />
               </div>
-            )}
-            <div className='flex flex-row items-center justify-between w-full gap-x-4'>
-              <input type='number' placeholder='Área' className={styleInput} ref={ inputArea } />
-              <input type='number' placeholder='Preço' className={styleInput} ref={ inputPrice } />
+              <textarea
+                ref={inputDescription}
+                className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full p-4 h-40 text-sm resize-none'
+                placeholder='Descrição completa do imóvel'
+                ></textarea>
             </div>
-          </div>
-          <div className='flex flex-col gap-y-4 p-4 w-full lg:w-1/3'>
-            <div className='flex flex-row items-center justify-between w-full gap-x-4'>
-              <input type='number' placeholder='Comodos' className={styleInput} ref={ inputComodos } />
-              <input
-                type='number'
-                min='0'
-                placeholder='Banheiros'
-                className={styleInput}
-                ref={ inputBanheiros }
-                />
-              <input
-                type='number'
-                placeholder='Vagas'
-                className={styleInput}
-                ref={ inputVagas }
-                />
-            </div>
-            <textarea
-              ref={inputDescription}
-              className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full p-4 h-40 text-sm resize-none'
-              placeholder='Descrição completa do imóvel'
-              ></textarea>
-          </div>
+          </form>
           <button
           className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-2/3 transition'
           onClick={saveNewImovel}
           >
-            Submit
+            Cadastrar novo imóvel
           </button>
-        </form>
+        </>
       )
     }
     </div>

@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@headlessui/react": "^1.6.4",
+    "@material-tailwind/react": "^1.4.2",
     "autoprefixer": "^10.4.7",
     "firebase": "^9.20.0",
     "postcss": "^8.4.14",

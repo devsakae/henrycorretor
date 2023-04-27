@@ -6,6 +6,7 @@ import {
 } from 'react-icons/bs';
 import { UserAuth } from '../lib/AuthContext';
 import AdminAdd from '../components/AdminAdd';
+import AdminManage from '../components/AdminManage';
 
 export default function Admin() {
   const { user } = UserAuth();
@@ -50,7 +51,7 @@ export default function Admin() {
       </div>
       <div className='text-center mb-14'>
         { adminMode === 'add' && <AdminAdd /> }
-        { adminMode === 'manage' && 'Alterar' }
+        { adminMode === 'manage' && <AdminManage /> }
         { adminMode === 'delete' && 'Deletar' }
       </div>
     </section>

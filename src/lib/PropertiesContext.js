@@ -4,6 +4,7 @@ import React, { createContext, useEffect, useState } from 'react'
 export const PropertyContext = createContext();
 
 const PropertyContextProvider = ({ children }) => {
+  const [carteira, setCarteira] = useState([]);
   const [houses, setHouses] = useState([]);
   const [bairro, setBairro] = useState('Todos os bairros');
   const [bairros, setBairros] = useState([]);
@@ -20,6 +21,7 @@ const PropertyContextProvider = ({ children }) => {
       .then((snapshot) => {
         let imoveis = [];
         snapshot.docs.forEach((doc) => imoveis.push({ ...doc.data(), id: doc.id }));
+        setCarteira(imoveis);
         setHouses(imoveis);
         
         const allBairros = imoveis.map((im) => im.bairro);
@@ -43,7 +45,7 @@ const PropertyContextProvider = ({ children }) => {
     if (price.includes('500.000,00')) priceParsed = 500000;
     if (price.includes('1.000.000,00')) priceParsed = 1000000;
 
-    const newHouses = houses.filter((house) => {
+    const newHouses = carteira.filter((house) => {
       const housePrice = parseInt(house.price);
       if (
         house.bairro === bairro &&
@@ -75,6 +77,7 @@ const PropertyContextProvider = ({ children }) => {
   };
 
   const value = {
+    carteira,
     houses,
     setHouses,
     bairro,
