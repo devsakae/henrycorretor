@@ -23,12 +23,6 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      localStorage.removeItem('henrycorretor_credentials');
-      if (currentUser)
-        localStorage.setItem(
-          'henrycorretor_credentials',
-          JSON.stringify(currentUser),
-        );
     });
     return () => {
       unsubscribe();
