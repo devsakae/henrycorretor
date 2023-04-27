@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { PropertyContext } from '../lib/PropertiesContext';
 import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../lib/firebase'
+import { db, storage } from '../lib/firebase'
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 export default function AdminAdd() {
   const { bairros } = useContext(PropertyContext);
+  const [warning, setWarning] = useState('');
   const [bairroadmin, setBairroadmin] = useState(bairros);
   const [insertBairro, setInsertBairro] = useState(false);
+  const [imageURL, setImageURL] = useState('');
+  const [progress, setProgress] = useState(0);
   const inputTitle = useRef();
-  const inputType = useRef('Casa');
+  const inputType = useRef('Apartamento');
   const inputDescription = useRef();
   const inputAddress = useRef();
   const inputBairro = useRef();
@@ -17,51 +21,92 @@ export default function AdminAdd() {
   const inputComodos = useRef();
   const inputBanheiros = useRef();
   const inputVagas = useRef();
+  const inputImages = useRef();
 
   const styleInput =
     'border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-2 h-14 text-sm';
-
+  
   useEffect(() => {
     const fixBairros = bairros.filter((b) => b !== 'Todos os bairros');
     fixBairros.push('➕ Inserir novo bairro...');
     setBairroadmin(fixBairros);
   }, [bairros]);
 
+  const handleWarning = (msg) => {
+    setWarning(msg);
+    setTimeout(() => setWarning(''), 3500);
+  }
+
   const handleBairros = ({ target }) => {
     setInsertBairro(false);
     if (target.value.includes('Inserir novo bairro')) setInsertBairro(true);
   };
 
+  const uploadImages = () => {
+    const file = inputImages.current.files[0];
+    const storageRef = ref(storage, `images/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      'state_changed',
+      snapshot => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setProgress(progress);
+      },
+      error => {
+        alert(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(url => {
+          setImageURL(url);
+        })
+      })
+  };
+
+  const vsf = (field) => field.trim().length === 0;
+
+  const validateFields = () => {
+    const name = inputTitle.current.value;
+    const type = inputType.current.value;
+    const description = inputDescription.current.value;
+    const address = inputAddress.current.value;
+    const bairro = inputBairro.current.value;
+    const area = inputArea.current.value;
+    const price = inputPrice.current.value;
+    const comodos = inputComodos.current.value;
+    const banheiros = inputBanheiros.current.value;
+    const vagas = inputVagas.current.value;
+    const images = inputImages.current.files;
+    if (vsf(name) || vsf(description) || vsf(address) || vsf(bairro) || vsf(comodos) || vsf(banheiros) || vsf(vagas)) {
+      return alert('Preencha todos os campos obrigatórios');
+    }
+    else return { name, type, description, address, bairro, area, price, comodos, banheiros, vagas, images };
+  }
+
   const saveNewImovel = async (event) => {
     event.preventDefault();
-    const payload = {
-      name: inputTitle.current.value,
-      type: inputType.current.value,
-      description: inputDescription.current.value,
-      address: inputAddress.current.value,
-      bairro: inputBairro.current.value,
-      area: inputArea.current.value,
-      price: inputPrice.current.value,
-      comodos: inputComodos.current.value,
-      banheiros: inputBanheiros.current.value,
-      vagas: inputVagas.current.value,
-    };
+    const payload = validateFields();
     const docRef = await addDoc(collection(db, "imoveis"), payload);
-    console.log("Document written with ID: ", docRef.id);
+    handleWarning(`Imóvel registrado com o ID ${docRef.id}`);
   };
 
   return (
     <div className='container flex flex-col gap-y-4 mx-auto w-full justify-center items-center'>
       <h1 className='font-bold text-lg p-4'>Adicionar novo imóvel</h1>
+      { warning && (<div className='bg-green-300 p-4 rounded-md flex flex-row gap-x-4'>
+        <div className='flex items-center text-3xl'>✔️</div>
+        <div className='max-w-[250px]'>{ warning }</div>
+      </div>) }
       <form className='flex flex-col lg:flex-row lg:w-full items-center justify-evenly'>
         <div className='flex flex-col items-start gap-y-4 p-4 w-full lg:w-2/3'>
           <input
+            id='name'
             type='text'
             placeholder='Título do imóvel'
-            className={styleInput}
+            className={ styleInput }
             ref={inputTitle}
           />
           <input
+            id='address'
             type='text'
             placeholder='Endereço'
             className={styleInput}
@@ -69,12 +114,9 @@ export default function AdminAdd() {
           />
           <div className='flex flex-row items-center justify-between w-full gap-x-4'>
             <select name='type' ref={inputType} className={styleInput}>
-              <option name='type' value='Casa'>
-                Casa
-              </option>
-              <option name='type' value='Apartamento'>
-                Apartamento
-              </option>
+              <option name='type' value='Apartamento'>Apartamento</option>
+              <option name='type' value='Casa'>Casa</option>
+              <option name='type' value='Terreno'>Terreno</option>
             </select>
             <select
               name='bairro'
@@ -110,6 +152,7 @@ export default function AdminAdd() {
             <input type='number' placeholder='Comodos' className={styleInput} ref={ inputComodos } />
             <input
               type='number'
+              min='0'
               placeholder='Banheiros'
               className={styleInput}
               ref={ inputBanheiros }
@@ -121,9 +164,19 @@ export default function AdminAdd() {
               ref={ inputVagas }
             />
           </div>
+          <input
+            type='file'
+            name='image'
+            multiple={ true }
+            className='w-full'
+            accept='image/png, image/jpg, image/jpeg'
+            ref={ inputImages }
+            onChange={ uploadImages }
+          />
+          { imageURL ? 'Imagem salva!' : <progress value={progress} max='100' /> }
           <textarea
             ref={inputDescription}
-            className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-52 text-sm'
+            className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full p-4 h-40 text-sm resize-none'
             placeholder='Descrição completa do imóvel'
           ></textarea>
         </div>
