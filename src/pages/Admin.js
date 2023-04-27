@@ -17,7 +17,7 @@ export default function Admin() {
     if (mode === adminMode) setAdminMode('');
   }
 
-  if (!user || user?.email !== process.env.REACT_APP_ADMIN_EMAIL) return (<div className='text-center text-3xl text-gray-400 mt-20 mb-20'>Acesso proibido.</div>);
+  if (!user || user.email !== process.env.REACT_APP_ADMIN_EMAIL) return (<div className='text-center text-3xl text-gray-400 mt-20 mb-20'>Acesso proibido.</div>);
 
   return (
     <section>
