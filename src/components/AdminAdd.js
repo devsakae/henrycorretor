@@ -151,8 +151,8 @@ export default function AdminAdd() {
             </div>
           </form>
           <button
-          className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-2/3 transition'
-          onClick={saveNewImovel}
+            className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-2/3 transition'
+            onClick={saveNewImovel}
           >
             Cadastrar novo imóvel
           </button>

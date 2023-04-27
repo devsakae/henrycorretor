@@ -51,11 +51,30 @@ export default function AdminManageSingle({ data }) {
     const comodos = inputComodos.current.value;
     const banheiros = inputBanheiros.current.value;
     const vagas = inputVagas.current.value;
-    if (vsf(name) || vsf(description) || vsf(address) || vsf(bairro) || vsf(comodos) || vsf(banheiros) || vsf(vagas)) {
+    if (
+      vsf(name) ||
+      vsf(description) ||
+      vsf(address) ||
+      vsf(bairro) ||
+      vsf(comodos) ||
+      vsf(banheiros) ||
+      vsf(vagas)
+    ) {
       return alert('Preencha todos os campos obrigatórios');
     }
-    return { name, type, description, address, bairro, area: Number(area), price: Number(price), comodos: Number(comodos), banheiros: Number(banheiros), vagas: Number(vagas) };
-  }
+    return {
+      name,
+      type,
+      description,
+      address,
+      bairro,
+      area: Number(area),
+      price: Number(price),
+      comodos: Number(comodos),
+      banheiros: Number(banheiros),
+      vagas: Number(vagas),
+    };
+  };
 
   const updateImovel = async (event) => {
     setLoading(true);
@@ -66,7 +85,7 @@ export default function AdminManageSingle({ data }) {
     setTimeout(() => {
       setSaved(true);
       setLoading(false);
-    }, 1000)
+    }, 1000);
   };
 
   return (
@@ -209,7 +228,18 @@ export default function AdminManageSingle({ data }) {
               ></textarea>
             </div>
           </form>
-          { loading ? 'Enviando...' : saved ? 'Salvo! Atualize a página' : (<button onClick={ updateImovel }>Salvar</button>) }
+          {loading ? (
+            'Enviando...'
+          ) : saved ? (
+            'Salvo! Atualize a página'
+          ) : (
+            <button
+              className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-2/3 transition'
+              onClick={updateImovel}
+            >
+              Salvar
+            </button>
+          )}
         </>
       )}
     </div>
