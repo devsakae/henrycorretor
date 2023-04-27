@@ -24,10 +24,10 @@ const PropertyDetails = () => {
     fetchById();
   }, [id])
   
-  if (!detailed) return (<div className='text-center text-3xl text-gray-400 m-12 min-h-[300px]'>Nenhum imóvel encontrado.</div>);
+  if (!detailed) return (<div className='text-center text-3xl text-gray-400 mt-12 min-h-[300px]'>Nenhum imóvel encontrado.</div>);
 
   return (
-    <section className='mb-20'>
+    <section className='mb-10'>
       {
         loading ? 'Carregando...' : (
         <div className='container mx-auto min-h-[800px] mb-14'>
@@ -51,20 +51,35 @@ const PropertyDetails = () => {
           <div className='flex flex-col items-start gap-8 lg:flex-row'>
             <div className='max-w-[768px]'>
               <div className='mb-8'>
-                <img src={detailed?.imageLg} alt='' />
+                <img src={detailed?.image1} alt='' />
               </div>
               <div className='flex gap-x-6 mb-6 text-violet-700'>
-                <div className='flex gap-x-2 items-center'>
-                  <BiBed className='text-2xl' />
-                  <div className='text-black'>{detailed?.comodos}</div>
+                <div className='flex flex-col gap-x-2 items-center'>
+                  <div className='flex flex-row items-center gap-x-2'>
+                    <BiBed className='text-2xl' alt='Cômodos' />
+                    <div className='text-black'>{detailed?.comodos}</div>
+                  </div>
+                  <div className='text-xs text-black'>
+                    Cômodos
+                  </div>
                 </div>
-                <div className='flex gap-x-2 items-center'>
+                <div className='flex flex-col gap-x-2 items-center'>
+                  <div className='flex flex-row items-center gap-x-2'>
                   <BiBath className='text-2xl' />
                   <div className='text-black'>{detailed?.banheiros}</div>
+                  </div>
+                  <div className='text-xs text-black'>
+                    Banheiros
+                  </div>
                 </div>
-                <div className='flex gap-x-2 items-center'>
-                  <BiArea className='text-2xl' />
-                  <div className='text-black'>{detailed?.area} m2</div>
+                <div className='flex flex-col gap-x-2 items-center'>
+                  <div className='flex flex-row items-center gap-x-2'>
+                    <BiArea className='text-2xl' />
+                    <div className='text-black'>{detailed?.area} m²</div>
+                  </div>
+                  <div className='text-xs text-black'>
+                    Área total
+                  </div>
                 </div>
               </div>
               <div>{detailed?.description}</div>
