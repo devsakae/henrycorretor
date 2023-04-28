@@ -4,6 +4,7 @@ import { BiBed, BiBath, BiArea, BiCar } from 'react-icons/bi';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import CorretorHenrySimon from '../components/CorretorHenrySimon';
 import { UserAuth } from '../lib/AuthContext';
+import { ImSpinner2 } from 'react-icons/im';
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -30,7 +31,7 @@ const PropertyDetails = () => {
   return (
     <section className='mb-10'>
       {
-        loading ? 'Carregando...' : (
+        loading ? <ImSpinner2 className='mx-auto animate-spin text-violet-700 text-4xl mt-12 mb-24' /> : (
         <div className='container mx-auto min-h-[800px] mb-14'>
           <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between'>
             <div>
@@ -54,7 +55,7 @@ const PropertyDetails = () => {
               <div className='mb-8' onClick={() => {
                 detailed.image2 ? setImageChange(!imageChange) : setImageChange(true)
               } }>
-                <img src={ imageChange ? detailed?.image1 : detailed?.image2 } alt='' />
+                <img src={ imageChange ? detailed?.image1 : detailed?.image2 } alt='Foto do imóvel' />
               </div>
               <div className='flex gap-x-6 mb-6 text-violet-700'>
                 <div className='flex flex-col gap-x-2 items-center'>
@@ -94,7 +95,7 @@ const PropertyDetails = () => {
                   </div>
                 </div>
               </div>
-              <div>{detailed?.description}</div>
+              <div>{ detailed?.description.replaceAll('\\n', '\n') }</div>
             </div>
             <CorretorHenrySimon user={ user } imovel={ detailed } id={ id } />
           </div>
