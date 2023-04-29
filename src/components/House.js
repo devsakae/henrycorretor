@@ -1,12 +1,13 @@
 import React from 'react';
 import { BiBed, BiBath, BiArea, BiCar } from 'react-icons/bi';
+import defaultImg from '../assets/img/default.png';
 
 const House = ({ house }) => {
   const { thumb, type, bairro, name, comodos, banheiros, area, price, vagas } = house;
   return (
-    <div className='bg-white shadow-1 p-5 rounded-lg rounded-tl-[90px] w-full max-w-[352px] mx-auto cursor-pointer hover:shadow-2xl transition'>
+    <div className='bg-white shadow-1 p-5 rounded-lg rounded-tl-[90px] w-full max-w-sm mx-auto cursor-pointer hover:shadow-2xl transition'>
       <div className='flex justify-center'>
-        <img src={ thumb } alt='Preview do imóvel' className='mb-6' />
+        <img src={ thumb ? thumb : defaultImg } alt='Preview do imóvel' className='mb-6' />
       </div>
       <div className='mb-4 flex gap-x-2 text-sm justify-center'>
         <div className='bg-green-500 rounded-full text-white px-3'>{ type }</div>
