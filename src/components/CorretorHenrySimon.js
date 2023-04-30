@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import ProfilePicture from '../assets/img/agents/henrysimon.png';
 import { FaWhatsapp } from 'react-icons/fa';
+// import nodemailer from 'nodemailer';
 
 export default function CorretorHenrySimon({ user, imovel, id }) {
   const inputName = useRef();
@@ -9,13 +10,34 @@ export default function CorretorHenrySimon({ user, imovel, id }) {
   const inputPhone = useRef();
   const inputText = useRef();
 
-  const sendMail = (event) => {
+  const sendMail = async (event) => {
     event.preventDefault();
-    const name = inputName.current.value;
-    const email = inputEmail.current.value;
-    const phone = inputPhone.current.value;
-    const message = inputText.current.value;
-    console.log(name, email, phone, message);
+    // const name = inputName.current.value;
+    // const email = inputEmail.current.value;
+    // const phone = inputPhone.current.value;
+    // const message = inputText.current.value;
+    // try {
+    //   const transporter = nodemailer.createTransport({
+    //     host: 'smtp.mailgun.org',
+    //     port: 587,
+    //     auth: {
+    //       user: process.env.REACT_APP_MAILGUN_USER,
+    //       pass: process.env.REACT_APP_MAILGUN_PASSWORD
+    //     }
+    //   });
+    //   const response = await transporter.sendMail({
+    //     from: name,
+    //     to: 'devsakae@gmail.com',
+    //     subject: 'Estou interessado no seu imóvel',
+    //     text: `O usuário ${name} solicitou informações via site:
+    //       E-mail: ${email}
+    //       Telefone: ${phone}
+    //       Mensagem: ${message}`
+    //   });
+    //   console.log('message sent:', response.messageId);
+    // } catch (err) {
+    //   alert(err.message);
+    // }
   }
 
   return (

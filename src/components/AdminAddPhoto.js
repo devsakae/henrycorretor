@@ -1,41 +1,76 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { db, storage } from '../lib/firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, updateDoc } from 'firebase/firestore';
 import thumbImg from '../assets/img/default.png';
+import noimage from '../assets/img/noimage.jpeg';
+// Get the max photos possible on your environment variable, or else declares it's 3.
+const MAX_PHOTOS = process.env.REACT_APP_MAX_PHOTOS || 3;
 
 export default function AdminAddPhoto({ imovelId, imovelName }) {
-  const [progress, setProgress] = useState({});
-  const [uploadingImage, setUploadingImage] = useState({});
-  const [defaultThumb, setDefaultThumb] = useState(false);
+  const [imageBucket, setImageBucket] = useState({ thumb: null, images: [] });
+  const [imagesUrl, setImagesUrl] = useState({ thumb: noimage });
+  const [totalBytes, setTotalBytes] = useState(0);
+  const [defaultThumb, setDefaultThumb] = useState(true);
+  const [progress, setProgress] = useState(0);
 
-  const progressBar = (value) => <progress value={value} max='100' />;
+  const iWantDefaultThumb = () => {
+    setDefaultThumb((prev) => !prev);
+    setImageBucket((prev) => ({ ...prev, thumb: null }));
+  };
 
-  const uploadImage = (e) => {
-    const file = e.target.files[0];
-    const storageRef = ref(storage, `${imovelId}/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setProgress(prev => ({ ...prev, [e.target.name]: progress }));
-      },
-      (error) => {
-        alert(error);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          const imovelRef = doc(db, 'imoveis', imovelId);
-          setUploadingImage(prev => ({ ...prev, [e.target.name]: url }));
-          updateDoc(imovelRef, {
-            [e.target.name]: url,
+  const handleFiles = (e) => {
+    if (e.target.files.length > MAX_PHOTOS)
+      return alert(
+        `Você pode enviar no máximo ${MAX_PHOTOS} fotos. Selecione novamente.`,
+      );
+    if (e.target.name === 'imovel_thumb')
+      return setImageBucket((prev) => ({ ...prev, thumb: e.target.files[0] }));
+    setImageBucket(prev => ({ thumb: prev.thumb, images: [] }));  
+    for (let i = 0; i < MAX_PHOTOS; i++) {
+      if (e.target.files[i] === undefined) break;
+      setImageBucket((prev) => ({
+        ...prev,
+        images: [
+          ...prev.images,
+          { [`img${i}`]: e.target.files[i] }
+        ]
+      }));
+    }
+  };
+
+  const uploadImage = () => {
+    setImagesUrl({ thumb: noimage });
+    const allFiles = defaultThumb ? [...imageBucket.images] : [{ thumb: imageBucket.thumb }, ...imageBucket.images];
+    const allKeys = [];
+    allFiles.forEach((file) => {
+      allKeys.push(...Object.keys(file));
+      setTotalBytes(prev => prev += file.size);
+    });
+    for (let i = 0; i < allFiles.length; i++) {
+      const actualKey = allKeys[i];
+      const file = allFiles[i][actualKey];
+      const storageRef = ref(storage, `${imovelId}/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          // setProgress(prev => prev + ((snapshot.bytesTransferred / totalBytes) * 100));
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setProgress(progress);
+        },
+        (error) => alert(error),
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+            const imovelRef = doc(db, 'imoveis', imovelId);
+            updateDoc(imovelRef, { [actualKey]: url });
+            setImagesUrl(prev => ({ ...prev, [actualKey]: url }))
           });
-        });
-      },
-    );
+        },
+      );
+      console.log('done!');
+      console.log()
+    }
   };
 
   return (
@@ -44,92 +79,81 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
         Upload de imagens para{' '}
         <span className='font-semibold'>{imovelName}</span>
       </h1>
-      <div className='flex flex-col gap-y-4 w-auto mb-8'>
-        <div className='flex flex-col lg:flex-row items-center gap-x-8 justify-center'>
-          <div>
-            <div className='flex flex-col items-start justify-center'>
-              <legend className='text-xs'>
-                Imagem de capa (312 x 312px) - Facultativo
-              </legend>
-              <label htmlFor='defaultThumb' className='text-xs items-center'>
-                <input id='defaultThumb' type='checkbox' checked={ defaultThumb } onChange={ () => setDefaultThumb(!defaultThumb) } />
-                { ' ' }
-                Quero usar padrão
-              </label>
+      <div className='flex flex-col lg:flex-row w-auto gap-x-4'>
+        <div className='flex flex-col gap-y-4 w-auto mb-8'>
+          <div className='flex flex-col lg:flex-row items-center gap-x-8 justify-center'>
+            <div>
+              <div className='flex flex-col items-start justify-center'>
+                <legend className='text-xs'>
+                  Imagem de capa (312 x 312px) - Facultativo
+                </legend>
+                <label htmlFor='defaultThumb' className='text-xs items-center'>
+                  <input
+                    id='defaultThumb'
+                    type='checkbox'
+                    checked={defaultThumb}
+                    onChange={iWantDefaultThumb}
+                  />{' '}
+                  Quero usar padrão
+                </label>
+              </div>
+              <input
+                type='file'
+                name='imovel_thumb'
+                accept='image/png, image/jpg, image/jpeg, image/svg'
+                onChange={ handleFiles }
+                className='hover:border-violet-400 border-2 p-4'
+              />
             </div>
-            <input
-              type='file'
-              name='thumb'
-              accept='image/png, image/jpg, image/jpeg, image/svg'
-              onChange={uploadImage}
-              className='hover:border-violet-400 border-2 p-4'
-            />
           </div>
-          <div className='flex min-w-[350px] justify-center'>
-            {uploadingImage.thumb ? (
-              <img
-                src={uploadingImage.thumb}
-                alt='Preview da imagem destaque'
-                className='max-h-[80px]'
+          <div className='flex flex-col lg:flex-row items-center gap-x-8 justify-center'>
+            <div>
+              <legend className='text-xs text-left'>
+                Máximo de fotos autorizado:{' '}
+                <span className='font-semibold'>{MAX_PHOTOS}</span>
+              </legend>
+              <input
+                type='file'
+                name='imovel_images'
+                multiple
+                accept='image/png, image/jpg, image/jpeg, image/svg'
+                onChange={ handleFiles }
+                className='hover:border-violet-400 border-2 p-4'
               />
-            ) : defaultThumb ? <img src={ thumbImg } alt='Thumb padrão' className='max-h-[80px]' /> : (
-              progressBar(progress.thumb)
-            )}
+            </div>
           </div>
         </div>
-        <div className='flex flex-col lg:flex-row items-center gap-x-8 justify-center'>
-          <div>
-            <legend className='text-xs text-left'>Imagem #1</legend>
-            <input
-              type='file'
-              name='image1'
-              accept='image/png, image/jpg, image/jpeg, image/svg'
-              onChange={uploadImage}
-              className='hover:border-violet-400 border-2 p-4'
+        <div className='w-full grid grid-cols-3 items-center'>
+          {defaultThumb ? (
+            <img
+              src={thumbImg}
+              alt='Imagem destaque padrão'
+              style={{ height: '150px' }}
             />
-          </div>
-          <div className='flex min-w-[350px] justify-center'>
-            {uploadingImage.image1 ? (
-              <img
-                src={uploadingImage.image1}
-                alt='Preview da imagem #1'
-                className='max-h-[80px]'
-              />
-            ) : (
-              progressBar(progress.image1)
-            )}
-          </div>
-        </div>
-        <div className='flex flex-col lg:flex-row items-center gap-x-8 justify-center'>
-          <div>
-            <legend className='text-xs text-left'>Imagem #2</legend>
-            <input
-              type='file'
-              name='image2'
-              accept='image/png, image/jpg, image/jpeg, image/svg'
-              onChange={uploadImage}
-              className='hover:border-violet-400 border-2 p-4'
+          ) : (
+            <img
+              src={ imagesUrl.thumb }
+              alt='Imagem destaque enviada'
+              style={{ height: '150px' }}
             />
-          </div>
-          <div className='flex min-w-[350px] justify-center'>
-            {uploadingImage.image2 ? (
-              <img
-                src={uploadingImage.image2}
-                alt='Preview da imagem #2'
-                className='max-h-[80px]'
-              />
-            ) : (
-              progressBar(progress.image2)
-            )}
-          </div>
+          )}
         </div>
       </div>
-      <Link
-        to={ `/imovel/${imovelId}` }
-        className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 mt-6 min-w-[300px] transition'
-      >
-        Finalizar
-      </Link>
+      <progress value={ progress } max='100' />
+      <div className='flex flex-row gap-x-4 items-center justify-center'>
+        <button
+          onClick={ uploadImage }
+          className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 mt-6 min-w-[300px] transition'
+        >
+          Enviar
+        </button>
+        {/* <Link
+          to={`/imovel/${imovelId}`}
+          className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 mt-6 min-w-[300px] transition'
+        >
+          Finalizar
+        </Link> */}
+      </div>
     </div>
   );
 }

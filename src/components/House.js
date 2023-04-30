@@ -41,7 +41,7 @@ const House = ({ house }) => {
         </div>
       </div>
       <div className='text-lg font-semibold text-violet-600 mb-4 text-right'>
-        { Number(price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
+        { price ? Number(price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Sob consulta' }
       </div>
     </div>
   );

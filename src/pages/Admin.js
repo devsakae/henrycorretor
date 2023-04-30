@@ -22,13 +22,13 @@ export default function Admin() {
   return (
     <section>
       <div className='container mx-auto mb-6'>
-        <div className='flex flex-row items-center justify-center gap-x-4'>
+        <div className='flex flex-row items-center justify-center'>
           <button
             className={ `flex flex-col gap-y-4 items-center p-4 min-w-[160px] hover:bg-gray-100 ${adminMode === 'add' && 'bg-gray-200 shadow-gray-800 shadow-sm'}`}
             onClick={ () => handleMode('add') }
             disabled={ user.email !== process.env.REACT_APP_ADMIN_EMAIL }
           >
-            <BsBuildingFillAdd size={'50px'} />
+            <BsBuildingFillAdd size={'40px'} />
             <div className='text-center'>Cadastrar novo</div>
           </button>
           <button
@@ -36,7 +36,7 @@ export default function Admin() {
             onClick={ () => handleMode('manage') }
             disabled={ user.email !== process.env.REACT_APP_ADMIN_EMAIL }
           >
-            <BsFillHouseGearFill size={'50px'} />
+            <BsFillHouseGearFill size={'40px'} />
             <div className='text-center'>Modificar imóvel</div>
           </button>
           <button
@@ -44,7 +44,7 @@ export default function Admin() {
             onClick={ () => handleMode('delete') }
             disabled={ user.email !== process.env.REACT_APP_ADMIN_EMAIL }
           >
-            <BsBuildingX size={'50px'} />
+            <BsBuildingX size={'40px'} />
             <div className='text-center'>Excluir imóvel</div>
           </button>
         </div>

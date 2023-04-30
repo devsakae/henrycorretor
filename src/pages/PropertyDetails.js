@@ -5,13 +5,13 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import CorretorHenrySimon from '../components/CorretorHenrySimon';
 import { UserAuth } from '../lib/AuthContext';
 import { ImSpinner2 } from 'react-icons/im';
+import Pictures from '../components/Pictures';
 
 const PropertyDetails = () => {
   const { id } = useParams();
   const { user } = UserAuth();
   const [detailed, setDetailed] = useState({ name: 'Aguarde' });
   const [loading, setLoading] = useState(true);
-  const [imageChange, setImageChange] = useState(true);
 
   useEffect(() => {
     const fetchById = async () => {
@@ -47,17 +47,16 @@ const PropertyDetails = () => {
               </div>
             </div>
             <div className='text-3xl font-semibold text-violet-600'>
-              { Number(detailed?.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
+              { detailed.price ? Number(detailed?.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Sob consulta' }
             </div>
           </div>
-          <div className='flex flex-col items-start gap-8 lg:flex-row'>
-            <div className='max-w-[768px]'>
-              <div className='mb-8' onClick={() => {
-                detailed.image2 ? setImageChange(!imageChange) : setImageChange(true)
-              } }>
-                <img src={ imageChange ? detailed?.image1 : detailed?.image2 } alt='Foto do imóvel' />
-              </div>
-              <div className='flex gap-x-6 mb-6 text-violet-700'>
+          <div className='flex flex-col items-start justify-center gap-8 lg:flex-row'>
+            <div className='w-full max-w-[768px]'>
+              <Pictures data={ detailed } />
+              {/* <div className='mb-8' onClick={() => detailed.img1 ? setImageChange(!imageChange) : setImageChange(true)}>
+                <img src={ imageChange ? detailed?.img0 : detailed?.img1 } alt='Foto do imóvel' />
+              </div> */}
+              <div className='flex gap-x-6 mt-6 mb-6 text-violet-700'>
                 <div className='flex flex-col gap-x-2 items-center'>
                   <div className='flex flex-row items-center gap-x-2'>
                     <BiBed className='text-2xl' alt='Cômodos' />
@@ -95,7 +94,8 @@ const PropertyDetails = () => {
                   </div>
                 </div>
               </div>
-              <div>{ detailed?.description.replaceAll('\\n', '\n') }</div>
+              <p className='mb-4'>{ detailed?.excert }</p>
+              <p>{ detailed?.description.replaceAll('\\n', '\n') }</p>
             </div>
             <CorretorHenrySimon user={ user } imovel={ detailed } id={ id } />
           </div>
