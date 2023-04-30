@@ -55,7 +55,8 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
       uploadTask.on(
         'state_changed',
         (snapshot) => {
-          // setProgress(prev => prev + ((snapshot.bytesTransferred / totalBytes) * 100));
+          // const progress = (snapshot.bytesTransferred / totalBytes) * 100;
+          // setProgress (prev => prev + progress);
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setProgress(progress);
         },

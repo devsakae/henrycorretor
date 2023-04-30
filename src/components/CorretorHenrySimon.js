@@ -1,43 +1,26 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProfilePicture from '../assets/img/agents/henrysimon.png';
 import { FaWhatsapp } from 'react-icons/fa';
-// import nodemailer from 'nodemailer';
+import emailjs from '@emailjs/browser';
+
+const API_KEY = process.env.REACT_APP_EMAILJS_API || 'emailjsapikey'
 
 export default function CorretorHenrySimon({ user, imovel, id }) {
-  const inputName = useRef();
-  const inputEmail = useRef();
-  const inputPhone = useRef();
-  const inputText = useRef();
+  const form = useRef();
+  const [warning, setWarning] = useState();
+ 
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs.sendForm('henrycorretor', 'contact_form', form.current, API_KEY)
+      .then(() => {
+          handleWarning('Sua mensagem foi enviada!')
+      }, (err) => handleWarning(`Erro: ${err.message}. Por favor, tente novamente`));
+  };
 
-  const sendMail = async (event) => {
-    event.preventDefault();
-    // const name = inputName.current.value;
-    // const email = inputEmail.current.value;
-    // const phone = inputPhone.current.value;
-    // const message = inputText.current.value;
-    // try {
-    //   const transporter = nodemailer.createTransport({
-    //     host: 'smtp.mailgun.org',
-    //     port: 587,
-    //     auth: {
-    //       user: process.env.REACT_APP_MAILGUN_USER,
-    //       pass: process.env.REACT_APP_MAILGUN_PASSWORD
-    //     }
-    //   });
-    //   const response = await transporter.sendMail({
-    //     from: name,
-    //     to: 'devsakae@gmail.com',
-    //     subject: 'Estou interessado no seu imóvel',
-    //     text: `O usuário ${name} solicitou informações via site:
-    //       E-mail: ${email}
-    //       Telefone: ${phone}
-    //       Mensagem: ${message}`
-    //   });
-    //   console.log('message sent:', response.messageId);
-    // } catch (err) {
-    //   alert(err.message);
-    // }
+  const handleWarning = (msg) => {
+    setWarning(msg);
+    setTimeout(() => setWarning(''), 5000)
   }
 
   return (
@@ -56,37 +39,38 @@ export default function CorretorHenrySimon({ user, imovel, id }) {
           </Link>
         </div>
       </div>
-      <form className='flex flex-col gap-y-4'>
+      <form className='flex flex-col gap-y-4' ref={ form } onSubmit={ sendEmail }>
         <input
           className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm'
           type='text'
+          name='from_name'
           placeholder='Nome'
-          ref={inputName}
           defaultValue={user && user.displayName}
         />
         <input
           className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm'
           type='text'
           placeholder='Endereço de e-mail'
-          ref={inputEmail}
+          name='reply_to'
           defaultValue={user && user.email}
         />
         <input
           className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm'
           type='text'
+          name=''
           placeholder='Telefone (com DDD)'
-          ref={inputPhone}
         />
         <textarea
           className='border border-gray-300 focus:border-violet-700 outline-none resize-none rounded w-full p-4 h-36 text-sm text-gray-700'
           placeholder='Mensagem'
+          name='message'
           defaultValue={`Estou interessado no seu imóvel ${imovel.name} (${id})`}
-          ref={inputText}
         ></textarea>
+        { warning && (<div className='bg-yellow-200'>{ warning }</div>) }
         <div className='flex gap-x-2'>
           <button
             className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition'
-            onClick={ sendMail }
+            type='submit'
           >
             Enviar e-mail
           </button>
