@@ -53,9 +53,6 @@ const PropertyDetails = () => {
           <div className='flex flex-col items-start justify-center gap-8 lg:flex-row'>
             <div className='w-full max-w-[768px]'>
               <Pictures data={ detailed } />
-              {/* <div className='mb-8' onClick={() => detailed.img1 ? setImageChange(!imageChange) : setImageChange(true)}>
-                <img src={ imageChange ? detailed?.img0 : detailed?.img1 } alt='Foto do imóvel' />
-              </div> */}
               <div className='flex gap-x-6 mt-6 mb-6 text-violet-700'>
                 <div className='flex flex-col gap-x-2 items-center'>
                   <div className='flex flex-row items-center gap-x-2'>

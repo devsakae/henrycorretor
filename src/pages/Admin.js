@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   BsBuildingFillAdd,
   BsFillHouseGearFill,
-  BsBuildingX,
 } from 'react-icons/bs';
 import { UserAuth } from '../lib/AuthContext';
 import AdminAdd from '../components/AdminAdd';
@@ -39,20 +38,11 @@ export default function Admin() {
             <BsFillHouseGearFill size={'40px'} />
             <div className='text-center'>Modificar imóvel</div>
           </button>
-          <button
-            className={ `flex flex-col gap-y-4 items-center p-4 min-w-[160px] hover:bg-gray-100 ${adminMode === 'delete' && 'bg-gray-200 shadow-gray-800 shadow-sm'}` }
-            onClick={ () => handleMode('delete') }
-            disabled={ user.email !== process.env.REACT_APP_ADMIN_EMAIL }
-          >
-            <BsBuildingX size={'40px'} />
-            <div className='text-center'>Excluir imóvel</div>
-          </button>
         </div>
       </div>
       <div className='text-center mb-14'>
         { adminMode === 'add' && <AdminAdd /> }
         { adminMode === 'manage' && <AdminManage /> }
-        { adminMode === 'delete' && 'Deletar' }
       </div>
     </section>
   );

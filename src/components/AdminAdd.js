@@ -3,7 +3,7 @@ import { PropertyContext } from '../lib/PropertiesContext';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import AdminAddPhoto from './AdminAddPhoto';
-import { ImSpinner2 } from 'react-icons/im';
+import Loading from './Loading';
 
 export default function AdminAdd() {
   const { bairros } = useContext(PropertyContext);
@@ -40,7 +40,7 @@ export default function AdminAdd() {
   const vsf = (field) => field.trim().length === 0;
 
   const validateFields = () => {
-    const { name, type, excert, description, address, bairro, area, price, comodos, banheiros, vagas } = form;
+    const { name, type, excert, description, address, bairro, area, privatearea, price, comodos, banheiros, vagas } = form;
     if (
       vsf(name) ||
       vsf(excert) ||
@@ -61,6 +61,7 @@ export default function AdminAdd() {
       address,
       bairro,
       area: Number(area),
+      privatearea: Number(privatearea),
       price: Number(price),
       comodos: Number(comodos),
       banheiros: Number(banheiros),
@@ -86,7 +87,7 @@ export default function AdminAdd() {
     setLoading(false);
   };
 
-  if (loading) return <ImSpinner2 className='mx-auto animate-spin text-violet-700 text-4xl mt-12 mb-24' />;
+  if (loading) return <Loading />;
 
   return (
     <div className='container flex flex-col gap-y-4 mx-auto w-full justify-center items-center'>

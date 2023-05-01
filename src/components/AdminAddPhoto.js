@@ -4,15 +4,16 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, updateDoc } from 'firebase/firestore';
 import thumbImg from '../assets/img/default.png';
 import noimage from '../assets/img/noimage.jpeg';
+import { Link } from 'react-router-dom';
 // Get the max photos possible on your environment variable, or else declares it's 3.
 const MAX_PHOTOS = process.env.REACT_APP_MAX_PHOTOS || 3;
 
 export default function AdminAddPhoto({ imovelId, imovelName }) {
   const [imageBucket, setImageBucket] = useState({ thumb: null, images: [] });
-  const [imagesUrl, setImagesUrl] = useState({ thumb: noimage });
-  const [totalBytes, setTotalBytes] = useState(0);
+  const [imagesUrl, setImagesUrl] = useState([noimage]);
   const [defaultThumb, setDefaultThumb] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [done, setDone] = useState(false);
 
   const iWantDefaultThumb = () => {
     setDefaultThumb((prev) => !prev);
@@ -24,8 +25,10 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
       return alert(
         `Você pode enviar no máximo ${MAX_PHOTOS} fotos. Selecione novamente.`,
       );
-    if (e.target.name === 'imovel_thumb')
+    if (e.target.name === 'imovel_thumb') {
+      setDefaultThumb(false);
       return setImageBucket((prev) => ({ ...prev, thumb: e.target.files[0] }));
+    }
     setImageBucket(prev => ({ thumb: prev.thumb, images: [] }));  
     for (let i = 0; i < MAX_PHOTOS; i++) {
       if (e.target.files[i] === undefined) break;
@@ -40,16 +43,17 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
   };
 
   const uploadImage = () => {
-    setImagesUrl({ thumb: noimage });
+    setImagesUrl([]);
     const allFiles = defaultThumb ? [...imageBucket.images] : [{ thumb: imageBucket.thumb }, ...imageBucket.images];
     const allKeys = [];
+    const filenames = [];
     allFiles.forEach((file) => {
       allKeys.push(...Object.keys(file));
-      setTotalBytes(prev => prev += file.size);
     });
     for (let i = 0; i < allFiles.length; i++) {
       const actualKey = allKeys[i];
       const file = allFiles[i][actualKey];
+      filenames.push(file.name);
       const storageRef = ref(storage, `${imovelId}/${file.name}`);
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
@@ -65,13 +69,20 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
             const imovelRef = doc(db, 'imoveis', imovelId);
             updateDoc(imovelRef, { [actualKey]: url });
-            setImagesUrl(prev => ({ ...prev, [actualKey]: url }))
+            setImagesUrl(prev => [...prev, url]);
+            if (i === (allFiles.length - 1)) {
+              const picsRef = doc(db, 'imoveis', imovelId);
+              updateDoc(picsRef, { pics: filenames });
+              if (i === (allFiles.length - 1)) {
+                const picsRef = doc(db, 'imoveis', imovelId);
+                updateDoc(picsRef, { pics: filenames });
+              }
+            }
           });
         },
       );
-      console.log('done!');
-      console.log()
     }
+    setTimeout(() => setDone(true), 3500);
   };
 
   return (
@@ -125,19 +136,14 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
           </div>
         </div>
         <div className='w-full grid grid-cols-3 items-center'>
-          {defaultThumb ? (
+          {defaultThumb && (
             <img
               src={thumbImg}
               alt='Imagem destaque padrão'
               style={{ height: '150px' }}
             />
-          ) : (
-            <img
-              src={ imagesUrl.thumb }
-              alt='Imagem destaque enviada'
-              style={{ height: '150px' }}
-            />
           )}
+          { imagesUrl.map((url) => (<img src={ url } alt='Preview do imóvel' key={ url } style={{ maxHeight: '150px' }} />)) }
         </div>
       </div>
       <progress value={ progress } max='100' />
@@ -148,12 +154,13 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
         >
           Enviar
         </button>
-        {/* <Link
+        <Link
+          disabled={ !done }
           to={`/imovel/${imovelId}`}
           className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 mt-6 min-w-[300px] transition'
         >
-          Finalizar
-        </Link> */}
+          Ver imóvel!
+        </Link>
       </div>
     </div>
   );

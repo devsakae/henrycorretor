@@ -66,7 +66,7 @@ export default function CorretorHenrySimon({ user, imovel, id }) {
           name='message'
           defaultValue={`Estou interessado no seu imóvel ${imovel.name} (${id})`}
         ></textarea>
-        { warning && (<div className='bg-yellow-200'>{ warning }</div>) }
+        { warning && (<div className='bg-yellow-200 p-4 border-violet-400 border rounded'>{ warning }</div>) }
         <div className='flex gap-x-2'>
           <button
             className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-full transition'
@@ -74,7 +74,8 @@ export default function CorretorHenrySimon({ user, imovel, id }) {
           >
             Enviar e-mail
           </button>
-          <button className='border border-violet-700 text-violet-700 hover:border-violet-500 hover:text-violet-500 rounded p-4 text-sm w-full transition'>
+          <button className='border border-violet-700 text-violet-700 hover:border-violet-500 hover:text-violet-500 rounded p-4 text-sm w-full transition'
+          onClick={ () => handleWarning('Sua mensagem foi enviada!') }>
             Ligar
           </button>
         </div>

@@ -3,6 +3,8 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
 import { PropertyContext } from '../lib/PropertiesContext';
 import { db } from '../lib/firebase';
 import { doc, setDoc } from '@firebase/firestore';
+import { Link } from 'react-router-dom';
+import AdminDelete from './AdminDelete';
 
 export default function AdminManageSingle({ data }) {
   const { bairros } = useContext(PropertyContext);
@@ -12,13 +14,16 @@ export default function AdminManageSingle({ data }) {
   const [insertBairro, setInsertBairro] = useState(false);
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [startDelete, setStartDelete] = useState(false);
 
   const inputName = useRef(data.name);
   const inputType = useRef(data.type);
+  const inputExcert = useRef(data.excert);
   const inputDescription = useRef(data.description);
   const inputAddress = useRef(data.address);
   const inputBairro = useRef(data.bairro);
   const inputArea = useRef(data.area);
+  const inputPrivateArea = useRef(data.privatearea);
   const inputPrice = useRef(data.price);
   const inputComodos = useRef(data.comodos);
   const inputBanheiros = useRef(data.banheiros);
@@ -43,10 +48,12 @@ export default function AdminManageSingle({ data }) {
   const validateFields = () => {
     const name = inputName.current.value;
     const type = inputType.current.value;
+    const excert = inputExcert.current.value;
     const description = inputDescription.current.value;
     const address = inputAddress.current.value;
     const bairro = inputBairro.current.value;
     const area = inputArea.current.value;
+    const privatearea = inputPrivateArea.current.value;
     const price = inputPrice.current.value;
     const comodos = inputComodos.current.value;
     const banheiros = inputBanheiros.current.value;
@@ -65,10 +72,12 @@ export default function AdminManageSingle({ data }) {
     return {
       name,
       type,
+      excert,
       description,
       address,
       bairro,
       area: Number(area),
+      privatearea: Number(privatearea),
       price: Number(price),
       comodos: Number(comodos),
       banheiros: Number(banheiros),
@@ -110,7 +119,7 @@ export default function AdminManageSingle({ data }) {
               <input
                 id='name'
                 type='text'
-                placeholder='Título do imóvel'
+                placeholder='Título do imóvel ✷'
                 defaultValue={data.name}
                 className={styleInput}
                 ref={inputName}
@@ -118,7 +127,7 @@ export default function AdminManageSingle({ data }) {
               <input
                 id='address'
                 type='text'
-                placeholder='Endereço'
+                placeholder='Endereço ✷'
                 defaultValue={data.address}
                 className={styleInput}
                 ref={inputAddress}
@@ -135,6 +144,12 @@ export default function AdminManageSingle({ data }) {
                   </option>
                   <option name='type' value='Casa'>
                     Casa
+                  </option>
+                  <option name='type' value='Sala'>
+                    Sala
+                  </option>
+                  <option name='type' value='Sítio'>
+                    Sítio
                   </option>
                   <option name='type' value='Terreno'>
                     Terreno
@@ -160,27 +175,37 @@ export default function AdminManageSingle({ data }) {
                     type='text'
                     name='bairro'
                     ref={inputBairro}
-                    placeholder='Digite o nome do bairro'
+                    placeholder='Digite o nome do bairro ✷'
                     className={styleInput}
                   />
                 </div>
               )}
               <div className='flex flex-row items-center justify-between w-full gap-x-4'>
                 <div>
-                  <legend className='text-xs text-left ml-2'>Área</legend>
+                  <legend className='text-xs text-left ml-2'>Área total</legend>
                   <input
                     type='number'
-                    placeholder='Área'
+                    placeholder='m²'
                     className={styleInput}
                     ref={inputArea}
                     defaultValue={data.area}
                   />
                 </div>
                 <div>
+                  <legend className='text-xs text-left ml-2'>Área privativa</legend>
+                  <input
+                    type='number'
+                    placeholder='m²'
+                    className={styleInput}
+                    ref={inputPrivateArea}
+                    defaultValue={data.privatearea}
+                  />
+                </div>
+                <div>
                   <legend className='text-xs text-left ml-2'>Preço</legend>
                   <input
                     type='number'
-                    placeholder='Preço'
+                    placeholder='Número'
                     className={styleInput}
                     ref={inputPrice}
                     defaultValue={data.price}
@@ -190,7 +215,7 @@ export default function AdminManageSingle({ data }) {
                   <legend className='text-xs text-left ml-2'>Cômodos</legend>
                   <input
                     type='number'
-                    placeholder='Comodos'
+                    placeholder='Número'
                     className={styleInput}
                     ref={inputComodos}
                     defaultValue={data.comodos}
@@ -200,8 +225,7 @@ export default function AdminManageSingle({ data }) {
                   <legend className='text-xs text-left ml-2'>Banheiros</legend>
                   <input
                     type='number'
-                    min='0'
-                    placeholder='Banheiros'
+                    placeholder='Número'
                     className={styleInput}
                     ref={inputBanheiros}
                     defaultValue={data.banheiros}
@@ -211,7 +235,7 @@ export default function AdminManageSingle({ data }) {
                   <legend className='text-xs text-left ml-2'>Vagas</legend>
                   <input
                     type='number'
-                    placeholder='Vagas'
+                    placeholder='Número'
                     className={styleInput}
                     ref={inputVagas}
                     defaultValue={data.vagas}
@@ -221,29 +245,39 @@ export default function AdminManageSingle({ data }) {
             </div>
             <div className='flex flex-col gap-y-4 p-4 w-full lg:w-1/3'>
               <textarea
+                ref={inputExcert}
+                className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full p-4 h-24 text-sm resize-none'
+                placeholder='Resumo do imóvel'
+                defaultValue={data.excert}
+              ></textarea>
+              <textarea
                 ref={inputDescription}
-                className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full p-4 h-48 text-sm resize-none'
+                className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full p-4 h-32 text-sm resize-none'
                 placeholder='Descrição completa do imóvel'
                 defaultValue={data.description}
               ></textarea>
             </div>
           </form>
+          { 
+            startDelete ? <AdminDelete data={ data } /> : ''
+          }
           {loading ? (
             'Enviando...'
           ) : saved ? (
-            'Salvo! Atualize a página'
+            <Link to={`/imoveis/${data.id}`}>Salvo! Ir para o imóvel salvo</Link>
           ) : (
             <div className='flex flex-row gap-x-4 justify-center'>
               <button
-                className='bg-violet-700 hover:bg-gray-400 hover:text-black text-white rounded p-4 text-sm min-w-[200px] transition'
+                className='bg-violet-700 hover:bg-violet-900 text-white rounded p-4 text-sm min-w-[200px] transition'
                 onClick={updateImovel}
               >
                 Salvar
               </button>
               <button
-                className='bg-white text-black hover:bg-violet-400 hover:text-white border-violet-400 border-2 rounded p-4 text-sm min-w-[200px] transition'
+                className='bg-violet-800 text-white hover:bg-violet-900 rounded p-4 text-sm min-w-[200px] transition'
+                onClick={ () => setStartDelete(!startDelete) }
               >
-                Alterar fotos
+                { startDelete ? 'Cancelar exclusão' : 'Excluir imóvel' }
               </button>
             </div>
           )}

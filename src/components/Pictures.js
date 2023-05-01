@@ -16,7 +16,6 @@ export default function Pictures({ data }) {
   }, [data]);
 
   const nextPicture = (n) => {
-    console.log('idx igual a', idx);
     if (idx >= (pictures.length - 1) && n) return setIdx(0);
     if (idx <= 0 && !n) return setIdx(pictures.length - 1);
     n ? setIdx(prev => prev + 1) : setIdx(prev => prev - 1);
