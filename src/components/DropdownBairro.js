@@ -15,7 +15,7 @@ const DropdownBairro = () => {
       >
         <RiMapPinLine className='dropdown-icon-primary' />
         <div>
-          <div className='text-[15px] font-medium leading-tight'>{bairro}</div>
+          <div className={ `text-[15px] leading-tight ${ !bairro.includes('Todos') && 'text-violet-600 font-medium' }` }>{bairro}</div>
           <div className='text-[13px]'>Selecione a localização</div>
         </div>
         {isOpen ? (

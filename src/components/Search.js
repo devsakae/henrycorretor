@@ -8,7 +8,7 @@ import { PropertyContext } from '../lib/PropertiesContext';
 const Search = () => {
   const { handleClick } = useContext(PropertyContext);
   return (
-    <div className='px-[30px] py-4 max-w-[1170px] mx-auto flex flex-col lg:flex-row justify-between gap-4 lg:gap-x-3 relative -top-4 lg:shadow-1 bg-white lg:bg-transparent lg:backdrop-blur rounded-lg'>
+    <div className='px-6 py-4 max-w-[1170px] mx-auto flex flex-col lg:flex-row justify-between gap-4 lg:gap-x-3 lg:shadow-1 bg-white lg:bg-transparent lg:backdrop-blur lg:mt-20 rounded-lg'>
       <DropdownBairro />
       <DropdownType />
       <DropdownPrice />

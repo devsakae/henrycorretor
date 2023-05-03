@@ -128,7 +128,7 @@ export default function AdminAdd() {
                     Casa
                   </option>
                   <option name='type' value='Sala'>
-                    Sala
+                    Sala comercial
                   </option>
                   <option name='type' value='Sítio'>
                     Sítio
@@ -182,6 +182,7 @@ export default function AdminAdd() {
                   name='price'
                   placeholder='Preço'
                   className={styleInput}
+                  pattern="^\R$ \d{1,3}(.\d{3})*(\,\d+)?$"
                   onChange={handleChange}
                   value={form.price}
                 />

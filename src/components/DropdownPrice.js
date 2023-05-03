@@ -26,7 +26,7 @@ const PriceRangeDropdown = () => {
       >
         <RiWallet3Line className='dropdown-icon-primary' />
         <div>
-          <div className='text-[15px] font-medium leading-tight'>{price}</div>
+          <div className={ `text-[15px] leading-tight ${ !price.includes('Todos') && 'text-violet-600 font-medium' }` }>{price}</div>
           <div className='text-[13px]'>Selecione a faixa de preço</div>
         </div>
         {isOpen ? (
