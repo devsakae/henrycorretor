@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { BiBed, BiBath, BiArea, BiCar } from 'react-icons/bi';
+import { BiBed, BiBath, BiArea, BiCar, BiHomeSmile } from 'react-icons/bi';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import CorretorHenrySimon from '../components/CorretorHenrySimon';
 import { UserAuth } from '../lib/AuthContext';
@@ -53,7 +53,7 @@ const PropertyDetails = () => {
           <div className='flex flex-col items-start justify-center gap-8 lg:flex-row'>
             <div className='w-full max-w-[768px]'>
               <Pictures data={ detailed } />
-              <div className='flex gap-x-6 mt-6 mb-6 text-violet-700'>
+              <div className='flex mt-6 mb-6 text-violet-700 justify-evenly'>
                 <div className='flex flex-col gap-x-2 items-center'>
                   <div className='flex flex-row items-center gap-x-2'>
                     <BiBed className='text-2xl' alt='Cômodos' />
@@ -88,6 +88,15 @@ const PropertyDetails = () => {
                   </div>
                   <div className='text-xs text-black'>
                     Área total
+                  </div>
+                </div>
+                <div className='flex flex-col gap-x-2 items-center'>
+                  <div className='flex flex-row items-center gap-x-2'>
+                    <BiHomeSmile className='text-2xl' />
+                    <div className='text-black'>{detailed?.privatearea} m²</div>
+                  </div>
+                  <div className='text-xs text-black'>
+                    Área privativa
                   </div>
                 </div>
               </div>

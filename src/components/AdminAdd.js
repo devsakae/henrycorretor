@@ -127,11 +127,14 @@ export default function AdminAdd() {
                   <option name='type' value='Casa'>
                     Casa
                   </option>
-                  <option name='type' value='Sala'>
+                  <option name='type' value='Sala comercial'>
                     Sala comercial
                   </option>
                   <option name='type' value='Sítio'>
                     Sítio
+                  </option>
+                  <option name='type' value='Studio'>
+                    Studio
                   </option>
                   <option name='type' value='Terreno'>
                     Terreno
