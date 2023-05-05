@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GrNext, GrPrevious } from 'react-icons/gr';
+import ModalImage from 'react-modal-image';
 const MAX_PHOTOS = process.env.REACT_APP_MAX_PHOTOS || 3;
 
 export default function Pictures({ data }) {
@@ -30,11 +31,10 @@ export default function Pictures({ data }) {
         </button>
       </div>
       <div>
-        <img
-          src={pictures[idx]}
-          alt='Imagem do imóvel'
-          onClick={nextPicture}
-          style={{ maxHeight: '450px' }}
+        <ModalImage
+          smallSrcSet={ `${pictures[idx]} 200w` }
+          large={ pictures[idx] }
+          alt='Preview da imagem'
         />
       </div>
       <div className={`flex flex-row items-stretch ${pictures.length < 2 && 'hidden'}`}>

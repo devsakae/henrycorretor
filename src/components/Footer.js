@@ -7,8 +7,8 @@ const Footer = () => {
         <p>
           Copyright 2023 Henry Simon Corretor Imobiliário
         </p>
-        <p>
-          Website desenvolvido por <a href="http://portfolio.sakae.social" className='font-semibold' target='blank'>Rodrigo Sakae</a>.
+        <p className='text-sm mt-4'>
+          Website desenvolvido por <a href="http://portfolio.sakae.social" className='font-semibold' target='blank'>DevSakae</a>.
         </p>
       </div>
     </footer>

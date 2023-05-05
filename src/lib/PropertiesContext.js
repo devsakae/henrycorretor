@@ -38,7 +38,6 @@ const PropertyContextProvider = ({ children }) => {
   }, []);
 
   const handleClick = () => {
-    console.log(bairro, '-', property, '-', price);
     setLoading(true);
     const isDefault = (str) => str.includes('Todos');
     // price handling
