@@ -5,11 +5,11 @@ import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API,
-  authDomain: "henry-corretor-e368d.firebaseapp.com",
-  projectId: "henry-corretor-e368d",
-  storageBucket: "henry-corretor-e368d.appspot.com",
-  messagingSenderId: "326317151434",
-  appId: "1:326317151434:web:12b8c86603f8b4cfc6d033",
+  authDomain: "henry-corretor-7c873.firebaseapp.com",
+  projectId: "henry-corretor-7c873",
+  storageBucket: "henry-corretor-7c873.appspot.com",
+  messagingSenderId: "506474453331",
+  appId: "1:506474453331:web:2b5a0b74ac5499337169a6"
 };
 
 const app = initializeApp(firebaseConfig);
