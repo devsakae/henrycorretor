@@ -32,9 +32,10 @@ export default function Pictures({ data }) {
       </div>
       <div>
         <ModalImage
-          smallSrcSet={ `${pictures[idx]} 200w` }
-          large={ pictures[idx] }
+          small={ pictures[idx] }
+          medium={ pictures[idx] }
           alt='Imagem do imóvel'
+          className='h-96'
         />
       </div>
       <div className={`flex flex-row items-stretch ${pictures.length < 2 && 'hidden'}`}>
