@@ -5,7 +5,8 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import CorretorHenrySimon from '../components/CorretorHenrySimon';
 import { UserAuth } from '../lib/AuthContext';
 import { ImSpinner2 } from 'react-icons/im';
-import Pictures from '../components/Pictures';
+// import Pictures from '../components/Pictures';
+import Fotos from '../components/Fotos';
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -52,12 +53,12 @@ const PropertyDetails = () => {
           </div>
           <div className='flex flex-col items-start justify-center gap-8 lg:flex-row'>
             <div className='w-full max-w-[768px]'>
-              <Pictures data={ detailed } />
+              <Fotos data={ detailed } />
               <div className='flex mt-6 mb-6 text-violet-700 justify-evenly'>
                 <div className='flex flex-col gap-x-2 items-center'>
                   <div className='flex flex-row items-center gap-x-2'>
-                    <BiBed className='text-2xl' alt='Cômodos' />
-                    <div className='text-black'>{detailed?.comodos}</div>
+                    <BiBed className='text-lg lg:text-2xl' alt='Cômodos' />
+                    <div className='text-sm lg:text-base text-black'>{detailed?.comodos}</div>
                   </div>
                   <div className='text-xs text-black'>
                     Cômodos
@@ -65,8 +66,8 @@ const PropertyDetails = () => {
                 </div>
                 <div className='flex flex-col gap-x-2 items-center'>
                   <div className='flex flex-row items-center gap-x-2'>
-                  <BiBath className='text-2xl' />
-                  <div className='text-black'>{detailed?.banheiros}</div>
+                    <BiBath className='text-lg lg:text-2xl' />
+                  <div className='text-sm lg:text-base text-black'>{detailed?.banheiros}</div>
                   </div>
                   <div className='text-xs text-black'>
                     Banheiros
@@ -74,8 +75,8 @@ const PropertyDetails = () => {
                 </div>
                 <div className='flex flex-col gap-x-2 items-center'>
                   <div className='flex flex-row items-center gap-x-2'>
-                  <BiCar className='text-2xl' />
-                  <div className='text-black'>{detailed?.vagas}</div>
+                  <BiCar className='text-lg lg:text-2xl' />
+                  <div className='text-sm lg:text-base text-black'>{detailed?.vagas}</div>
                   </div>
                   <div className='text-xs text-black'>
                     Vagas
@@ -83,8 +84,8 @@ const PropertyDetails = () => {
                 </div>
                 <div className='flex flex-col gap-x-2 items-center'>
                   <div className='flex flex-row items-center gap-x-2'>
-                    <BiArea className='text-2xl' />
-                    <div className='text-black'>{detailed?.area} m²</div>
+                    <BiArea className='text-lg lg:text-2xl' />
+                    <div className='text-sm lg:text-base text-black'>{detailed?.area} m²</div>
                   </div>
                   <div className='text-xs text-black'>
                     Área total
@@ -92,8 +93,8 @@ const PropertyDetails = () => {
                 </div>
                 <div className='flex flex-col gap-x-2 items-center'>
                   <div className='flex flex-row items-center gap-x-2'>
-                    <BiHomeSmile className='text-2xl' />
-                    <div className='text-black'>{detailed?.privatearea} m²</div>
+                    <BiHomeSmile className='text-lg lg:text-2xl' />
+                    <div className='text-sm lg:text-base text-black'>{detailed?.privatearea} m²</div>
                   </div>
                   <div className='text-xs text-black'>
                     Área privativa

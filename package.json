@@ -10,7 +10,7 @@
     "dotenv": "^16.0.3",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-modal-image": "^2.6.0",
+    "react-responsive-carousel": "^3.2.23",
     "swiper": "^9.2.4",
     "web-vitals": "^2.1.4"
   },
