@@ -7,7 +7,7 @@ const House = ({ house }) => {
   return (
     <div className='bg-white shadow-1 p-5 rounded-lg rounded-tl-[90px] w-full max-w-sm mx-auto cursor-pointer hover:shadow-2xl hover:shadow-slate-600 transition'>
       <div className='flex justify-center'>
-        <img src={ thumb ? thumb : defaultImg } alt='Preview do imóvel' className='mb-6' />
+        <img src={ thumb ? thumb : defaultImg } alt='Preview do imóvel' className='mb-6 photo' />
       </div>
       <div className='mb-4 flex gap-x-2 text-sm justify-center'>
         <div className='bg-green-500 rounded-full text-white px-3'>{ type }</div>

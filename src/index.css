@@ -44,3 +44,7 @@
     @apply appearance-none;
   }
 }
+
+.photo {
+  @apply w-full h-[312px] object-cover rounded-tl-[65px] rounded-br-[65px];
+}
