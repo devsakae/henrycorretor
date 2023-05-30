@@ -132,6 +132,18 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
               />
             </div>
           </div>
+          <div>
+            <div>
+              <legend className='text-xs text-left'>
+                Vídeo no Youtube?
+              </legend>
+              <input
+                type='text'
+                id='imovel_video'
+                className='hover:border-violet-400 border-2 p-4'
+              />
+            </div>
+          </div>
         </div>
         <div className='w-full grid grid-cols-3 items-center'>
           {defaultThumb && (
