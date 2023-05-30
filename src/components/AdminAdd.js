@@ -12,6 +12,7 @@ export default function AdminAdd() {
   const [bairroadmin, setBairroadmin] = useState(bairros);
   const [insertBairro, setInsertBairro] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [disabledSaveButton, setDisabledSaveButton] = useState(true);
   const [form, setForm] = useState({
     name: '',
     address: '',
@@ -37,10 +38,8 @@ export default function AdminAdd() {
     handleChange({ target: { name: 'bairro', value: fixBairros[0] } })
   }, [bairros]);
 
-  const vsf = (field) => field.trim().length === 0;
-
-  const validateFields = () => {
-    const { name, type, excert, description, address, bairro, area, privatearea, price, comodos, banheiros, vagas } = form;
+  useEffect(() => {
+    const { name, excert, description, address, bairro, comodos, banheiros, vagas } = form;
     if (
       vsf(name) ||
       vsf(excert) ||
@@ -51,9 +50,28 @@ export default function AdminAdd() {
       vsf(banheiros) ||
       vsf(vagas)
     ) {
-      return alert('Preencha todos os campos marcados com ✷');
+      setDisabledSaveButton(true);
+    } else {
+      setDisabledSaveButton(false);
     }
-    return {
+  }, [form])
+
+  const vsf = (field) => field.trim().length === 0;
+
+  const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleBairros = (e) => {
+    handleChange(e);
+    e.target.value.includes('Inserir novo bairro')
+      ? setInsertBairro(true)
+      : setInsertBairro(false);
+  };
+
+  const saveNewImovel = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    const { name, type, excert, description, address, bairro, area, privatearea, price, comodos, banheiros, vagas } = form;
+    const payload = {
       name,
       type,
       excert,
@@ -67,21 +85,6 @@ export default function AdminAdd() {
       banheiros: Number(banheiros),
       vagas: Number(vagas),
     };
-  };
-
-  const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-
-  const handleBairros = (e) => {
-    handleChange(e);
-    e.target.value.includes('Inserir novo bairro')
-      ? setInsertBairro(true)
-      : setInsertBairro(false);
-  };
-
-  const saveNewImovel = async (event) => {
-    setLoading(true);
-    event.preventDefault();
-    const payload = validateFields();
     const docRef = await addDoc(collection(db, "imoveis"), payload);
     setNewId(docRef.id);
     setLoading(false);
@@ -92,8 +95,8 @@ export default function AdminAdd() {
   return (
     <div className='container flex flex-col gap-y-4 mx-auto w-full justify-center items-center'>
       <h1 className='font-bold text-lg p-4'>Adicionar novo imóvel</h1>
-      { newId ? (
-        <AdminAddPhoto imovelId={ newId } imovelName={ form.name } />
+      {newId ? (
+        <AdminAddPhoto imovelId={newId} imovelName={form.name} />
       ) : (
         <>
           <form className='flex flex-col lg:flex-row lg:w-full items-center justify-evenly'>
@@ -101,6 +104,7 @@ export default function AdminAdd() {
               <input
                 name='name'
                 type='text'
+                required
                 placeholder='Título do imóvel ✷'
                 className={styleInput}
                 onChange={handleChange}
@@ -109,6 +113,7 @@ export default function AdminAdd() {
               <input
                 name='address'
                 type='text'
+                required
                 placeholder='Endereço ✷'
                 className={styleInput}
                 onChange={handleChange}
@@ -144,6 +149,7 @@ export default function AdminAdd() {
                   name='bairro'
                   className={styleInput}
                   onChange={handleBairros}
+                  required
                 >
                   {bairroadmin.map((b, i) => (
                     <option name='bairro' value={b} key={i}>
@@ -152,7 +158,7 @@ export default function AdminAdd() {
                   ))}
                 </select>
               </div>
-              { (insertBairro || bairroadmin.length < 2) && (
+              {(insertBairro || bairroadmin.length < 2) && (
                 <div className='flex flex-row items-center justify-between w-full gap-x-4'>
                   <input
                     type='text'
@@ -172,7 +178,7 @@ export default function AdminAdd() {
                   onChange={handleChange}
                   value={form.area}
                 />
-                 <input
+                <input
                   type='number'
                   name='privatearea'
                   placeholder='Área privativa (m²)'
@@ -198,42 +204,43 @@ export default function AdminAdd() {
                   name='comodos'
                   placeholder='Comodos ✷'
                   className={styleInput}
-                  onChange={ handleChange }
+                  onChange={handleChange}
                 />
                 <input
                   type='number'
                   name='banheiros'
                   placeholder='Banheiros ✷'
                   className={styleInput}
-                  onChange={ handleChange }
+                  onChange={handleChange}
                 />
                 <input
                   type='number'
                   name='vagas'
                   placeholder='Vagas ✷'
                   className={styleInput}
-                  onChange={ handleChange }
+                  onChange={handleChange}
                 />
               </div>
               <textarea
                 name='excert'
                 className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full p-4 h-20 text-sm resize-none'
                 placeholder='Descrição resumida ✷'
-                value={ form.excert }
-                onChange={ handleChange }
+                value={form.excert}
+                onChange={handleChange}
               ></textarea>
               <textarea
                 name='description'
                 className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full p-4 h-40 text-sm resize-none'
                 placeholder='Informações complementares ✷'
-                value={ form.description }
-                onChange={ handleChange }
+                value={form.description}
+                onChange={handleChange}
               ></textarea>
             </div>
           </form>
           <button
-            className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-2/3 transition'
+            className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 text-sm w-2/3 transition disabled:bg-purple-400 disabled:text-gray-200 disabled:cursor-not-allowed'
             onClick={saveNewImovel}
+            disabled={disabledSaveButton}
           >
             Cadastrar novo imóvel
           </button>
