@@ -12,20 +12,23 @@ export default function AdminDelete({ data }) {
 
   const handleChange = (e) => {
     setConfirmation(e.target.value);
-    (e.target.value === DELETE_CONFIRMATION) ? setValidate(false) : setValidate(true);
+    (e.target.value === DELETE_CONFIRMATION) && setValidate(false);
   };
 
   const deleteImovel = async () => {
     await deleteDoc(doc(db, 'imoveis', id));
     const storage = getStorage();
-    pics.forEach((picname) => {
-      const idRef = ref(storage, `${id}/${picname}`);
-      deleteObject(idRef).catch((err) => {
-        alert(err.message);
+    if (pics) {
+      pics.forEach((picname) => {
+        const idRef = ref(storage, `${id}/${picname}`);
+        deleteObject(idRef).catch((err) => {
+          alert(err.message);
+        });
       });
-    });
+    }
     setValidate(true);
     alert('Imóvel deletado com sucesso!');
+    window.location.reload();
   };
   
   return (

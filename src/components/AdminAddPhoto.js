@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { db, storage } from '../lib/firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, updateDoc } from 'firebase/firestore';
@@ -14,6 +14,7 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
   const [defaultThumb, setDefaultThumb] = useState(true);
   const [progress, setProgress] = useState(0);
   const [done, setDone] = useState(false);
+  const youtubeinput = useRef();
 
   const iWantDefaultThumb = () => {
     setDefaultThumb((prev) => !prev);
@@ -44,6 +45,14 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
 
   const uploadImage = () => {
     setImagesUrl([]);
+    const imovelRef = doc(db, 'imoveis', imovelId);
+    if (youtubeinput.current.value !== '') {
+      if (youtubeinput.current.value.includes('youtube.com') === false) return alert('Link do youtube inválido');
+      else {
+        const youtubeId = youtubeinput.current.value.split('v=')[1];
+        updateDoc(imovelRef, { youtube: youtubeId })
+      }
+    }
     const allFiles = defaultThumb ? [...imageBucket.images] : [{ thumb: imageBucket.thumb }, ...imageBucket.images];
     const allKeys = [];
     const filenames = [];
@@ -135,12 +144,13 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
           <div>
             <div>
               <legend className='text-xs text-left'>
-                Vídeo no Youtube?
+                Link do vídeo no Youtube?
               </legend>
               <input
                 type='text'
+                ref={youtubeinput}
                 id='imovel_video'
-                className='hover:border-violet-400 border-2 p-4'
+                className='hover:border-violet-400 border-2 p-2 w-full'
               />
             </div>
           </div>
@@ -160,14 +170,15 @@ export default function AdminAddPhoto({ imovelId, imovelName }) {
       <div className='flex flex-row gap-x-4 items-center justify-center'>
         <button
           onClick={ uploadImage }
-          className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 mt-6 min-w-[300px] transition'
+          className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 mt-6 min-w-[300px] transition disabled:bg-violet-400 disabled:cursor-not-allowed'
+          disabled={ imageBucket.length < 1 }
         >
           Enviar
         </button>
         <Link
           disabled={ !done }
           to={`/imovel/${imovelId}`}
-          className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 mt-6 min-w-[300px] transition'
+          className='bg-violet-700 hover:bg-violet-800 text-white rounded p-4 mt-6 min-w-[300px] transition disabled:bg-violet-400 disabled:cursor-not-allowed'
         >
           Ver imóvel!
         </Link>

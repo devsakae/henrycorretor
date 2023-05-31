@@ -7,6 +7,7 @@ import { UserAuth } from '../lib/AuthContext';
 import { ImSpinner2 } from 'react-icons/im';
 // import Pictures from '../components/Pictures';
 import Fotos from '../components/Fotos';
+import Share from '../components/Share';
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -39,13 +40,16 @@ const PropertyDetails = () => {
               <h2 className='text-2xl font-semibold'>{detailed?.name}</h2>
               <h3 className='text-lg mb-4'>{detailed?.address}</h3>
             </div>
-            <div className='mb-4 lg:mb-0 flex gap-x-2 text-sm'>
-              <div className='bg-green-500 text-white px-3 rounded-full'>
-                {detailed?.type}
+            <div className='flex flex-col items-center gap-2'>
+              <div className='flex gap-x-2 text-sm'>
+                <div className='bg-green-500 text-white px-3 rounded-full'>
+                  {detailed?.type}
+                </div>
+                <div className='bg-violet-500 text-white px-3 rounded-full'>
+                  {detailed?.bairro}
+                </div>
               </div>
-              <div className='bg-violet-500 text-white px-3 rounded-full'>
-                {detailed?.bairro}
-              </div>
+              <Share info={ detailed } />
             </div>
             <div className='text-3xl font-semibold text-violet-600'>
               { detailed.price ? Number(detailed?.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : 'Sob consulta' }

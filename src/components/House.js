@@ -13,7 +13,7 @@ const House = ({ house }) => {
         <div className='bg-green-500 rounded-full text-white px-3'>{ type }</div>
         <div className='bg-violet-500 rounded-full text-white px-3'>{ bairro }</div>
       </div>
-      <div className='text-lg font-semibold text-left'>{ name }</div>
+      <div className='text-lg font-semibold text-left truncate'>{ name }</div>
       <div className='flex gap-x-4 mb-2 justify-left'>
         <div className='flex text-gray-600 gap-1 items-center'>
           <div className='text-[20px]'>
