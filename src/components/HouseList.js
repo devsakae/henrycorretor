@@ -28,7 +28,7 @@ const HouseList = () => {
         <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-10'>
           {houses.map((house, idx) => {
             return (
-              <Link to={`imovel/${house.id}`} key={idx}>
+              <Link to={`imovel/${house.id}`} key={idx} data-aos="fade-up">
                 <House house={house} />
               </Link>
             );

@@ -17,16 +17,25 @@ export default function Fotos({ data }) {
     }
   }, [data]);
 
+  if (data.youtube) {
+    return (
+      <Carousel showThumbs={ false } dynamicHeight={ true } infiniteLoop={ true } >
+        <YouTube videoId={ data.youtube } />
+        {
+          pictures.map((pic, idx) => (
+            <div key={ idx }><img src={ pic } alt="Imagem do imóvel" /></div>
+          ))
+        }
+      </Carousel>
+    )
+  }
   
   return (
     <Carousel showThumbs={ false } dynamicHeight={ true } infiniteLoop={ true } >
       {
         pictures.map((pic, idx) => (
           <div key={ idx }><img src={ pic } alt="Imagem do imóvel" /></div>
-          ))
-        }
-      {
-        (data.youtube) && (<YouTube videoId={ data.youtube } />)
+        ))
       }
     </Carousel>
   )
