@@ -1,6 +1,6 @@
 {
-  "name": "real-estate-main",
-  "version": "0.1.0",
+  "name": "henry-corretor",
+  "version": "1.0.2",
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
