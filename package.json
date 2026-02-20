@@ -15,7 +15,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-share": "^4.4.1",
     "react-youtube": "^10.1.0",
-    "swiper": "^9.2.4",
+    "swiper": "^12.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
