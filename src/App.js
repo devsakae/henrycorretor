@@ -7,6 +7,8 @@ import PropertyDetails from './pages/PropertyDetails';
 import Admin from './pages/Admin';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Privacidade from './pages/Privacidade';
+import Privacy from './pages/Privacy';
 
 const App = () => {
   useEffect(() => {
@@ -20,6 +22,8 @@ const App = () => {
         <Routes>
           <Route path='/imovel/:id' element={<PropertyDetails />} />
           <Route path='/admin' element={<Admin />} />
+          <Route path='/privacidade' element={<Privacidade />} />
+          <Route path='/privacy' element={<Privacy />} />
           <Route path='/' element={<Home />} />
         </Routes>
       </div>
