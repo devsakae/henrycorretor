@@ -57,7 +57,7 @@ export default function CorretorHenrySimon({ user, imovel, id }) {
         <input
           className='border border-gray-300 focus:border-violet-700 outline-none rounded w-full px-4 h-14 text-sm'
           type='text'
-          name=''
+          name='sender_phone'
           placeholder='Telefone (com DDD)'
         />
         <textarea
