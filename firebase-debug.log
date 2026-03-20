@@ -1,43 +1,31 @@
-[debug] [2024-07-11T00:35:55.067Z] ----------------------------------------------------------------------
-[debug] [2024-07-11T00:35:55.071Z] Command:       /Users/admin/.nvm/versions/node/v20.9.0/bin/node /Users/admin/.nvm/versions/node/v20.9.0/bin/firebase init hosting
-[debug] [2024-07-11T00:35:55.071Z] CLI Version:   13.13.1
-[debug] [2024-07-11T00:35:55.071Z] Platform:      darwin
-[debug] [2024-07-11T00:35:55.072Z] Node Version:  v20.9.0
-[debug] [2024-07-11T00:35:55.072Z] Time:          Wed Jul 10 2024 21:35:55 GMT-0300 (Brasilia Standard Time)
-[debug] [2024-07-11T00:35:55.072Z] ----------------------------------------------------------------------
+[debug] [2026-03-20T22:11:55.117Z] ----------------------------------------------------------------------
+[debug] [2026-03-20T22:11:55.120Z] Command:       /Users/rodsakae/.nvm/versions/node/v24.14.0/bin/node /Users/rodsakae/.nvm/versions/node/v24.14.0/bin/firebase deploy --only hosting
+[debug] [2026-03-20T22:11:55.121Z] CLI Version:   15.11.0
+[debug] [2026-03-20T22:11:55.121Z] Platform:      darwin
+[debug] [2026-03-20T22:11:55.121Z] Node Version:  v24.14.0
+[debug] [2026-03-20T22:11:55.121Z] Time:          Fri Mar 20 2026 19:11:55 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2026-03-20T22:11:55.121Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2024-07-11T00:35:55.141Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2024-07-11T00:35:55.142Z] > authorizing via signed-in user (devsakae@gmail.com)
-[info] 
-     ######## #### ########  ######## ########     ###     ######  ########
-     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
-     ######    ##  ########  ######   ########  #########  ######  ######
-     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
-     ##       #### ##     ## ######## ########  ##     ##  ######  ########
-
-You're about to initialize a Firebase project in this directory:
-
-  /Users/admin/Codes/henrycorretor
-
-Before we get started, keep in mind:
-
-  * You are initializing within an existing Firebase project directory
-
-[info] 
-=== Project Setup
-[info] 
-[info] First, let's associate this project directory with a Firebase project.
-[info] You can create multiple project aliases by running firebase use --add, 
-[info] but for now we'll just set up a default project.
-[info] 
-[debug] [2024-07-11T00:35:55.146Z] Using project from CLI flag: henry-corretor-e368d
-[debug] [2024-07-11T00:35:55.148Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/henry-corretor-e368d [none]
-[debug] [2024-07-11T00:35:55.938Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/henry-corretor-e368d 403
-[debug] [2024-07-11T00:35:55.938Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/henry-corretor-e368d {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
-[debug] [2024-07-11T00:35:55.939Z] HTTP Error: 403, The caller does not have permission
-[debug] [2024-07-11T00:35:56.105Z] FirebaseError: HTTP Error: 403, The caller does not have permission
-    at responseToError (/Users/admin/.nvm/versions/node/v20.9.0/lib/node_modules/firebase-tools/lib/responseToError.js:49:12)
-    at RetryOperation._fn (/Users/admin/.nvm/versions/node/v20.9.0/lib/node_modules/firebase-tools/lib/apiv2.js:305:77)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[debug] [2026-03-20T22:11:56.163Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-20T22:11:56.163Z] > authorizing via signed-in user (devsakae@gmail.com)
+[debug] [2026-03-20T22:11:56.163Z] [iam] checking project henry-corretor-e368d for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-03-20T22:11:56.164Z] Checked if tokens are valid: true, expires at: 1774048306571
+[debug] [2026-03-20T22:11:56.165Z] Checked if tokens are valid: true, expires at: 1774048306571
+[debug] [2026-03-20T22:11:56.165Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/henry-corretor-e368d:testIamPermissions [none]
+[debug] [2026-03-20T22:11:56.166Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/henry-corretor-e368d:testIamPermissions  x-goog-user-project=henry-corretor-e368d
+[debug] [2026-03-20T22:11:56.166Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/henry-corretor-e368d:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-03-20T22:11:57.164Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/henry-corretor-e368d:testIamPermissions 400
+[debug] [2026-03-20T22:11:57.164Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/henry-corretor-e368d:testIamPermissions {"error":{"code":400,"message":"Project 'projects/henry-corretor-e368d' not found or deleted.","status":"INVALID_ARGUMENT","details":[{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"USER_PROJECT_DENIED","domain":"googleapis.com","metadata":{"containerInfo":"projects/henry-corretor-e368d","service":"cloudresourcemanager.googleapis.com","consumer":"projects/henry-corretor-e368d"}}]}}
+[debug] [2026-03-20T22:11:57.165Z] [iam] error while checking permissions, command may fail: Request to https://cloudresourcemanager.googleapis.com/v1/projects/henry-corretor-e368d:testIamPermissions had HTTP Error: 400, Project 'projects/henry-corretor-e368d' not found or deleted.
+[debug] [2026-03-20T22:11:57.166Z] Checked if tokens are valid: true, expires at: 1774048306571
+[debug] [2026-03-20T22:11:57.166Z] Checked if tokens are valid: true, expires at: 1774048306571
+[debug] [2026-03-20T22:11:57.166Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/henry-corretor-e368d [none]
+[debug] [2026-03-20T22:11:57.823Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/henry-corretor-e368d 403
+[debug] [2026-03-20T22:11:57.823Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/henry-corretor-e368d {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2026-03-20T22:11:57.824Z] Request to https://firebase.googleapis.com/v1beta1/projects/henry-corretor-e368d had HTTP Error: 403, The caller does not have permission
+[debug] [2026-03-20T22:11:57.983Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/henry-corretor-e368d had HTTP Error: 403, The caller does not have permission
+    at responseToError (/Users/rodsakae/.nvm/versions/node/v24.14.0/lib/node_modules/firebase-tools/lib/responseToError.js:53:12)
+    at RetryOperation._fn (/Users/rodsakae/.nvm/versions/node/v24.14.0/lib/node_modules/firebase-tools/lib/apiv2.js:333:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
 [error] 
 [error] Error: Failed to get Firebase project henry-corretor-e368d. Please make sure the project exists and your account has permission to access it.
